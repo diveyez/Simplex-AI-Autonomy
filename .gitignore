@@ -1,0 +1,7 @@
+@*
+*.zip
+*.pbo
+*.biprivatekey
+Thumbs.db
+sync-test-mission.bat
+steam-desc.txt

@@ -1,0 +1,12 @@
+name = "Simplex AI Autonomy";
+picture = "saa.paa";
+actionName = "Website";
+action = "https://github.com/SceptreOfficial/Simplex-AI-Autonomy";
+description = "Simplex AI Autonomy";
+logo = "saa.paa";
+logoOver = "saa.paa";
+tooltip = "Simplex AI Autonomy";
+tooltipOwned = "Simplex AI Autonomy Owned";
+overview = "SAA (Simplex AI Autonomy) is an AI management system for Arma 3";
+author = "SAA Team";
+overviewPicture = "saa.paa";
