@@ -6,5 +6,5 @@ if (isServer) then {
 	SAA_stateMachine = _stateMachine;
 	publicVariable "SAA_stateMachine";
 
-	["SAA_assignment",SAA_fnc_assignmentDialogConfirm] call CBA_fnc_addEventHandler;
+	["SAA_assignment",{_this call SAA_fnc_assignmentDialogConfirm}] call CBA_fnc_addEventHandler;
 };
