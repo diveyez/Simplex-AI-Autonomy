@@ -20,10 +20,8 @@ class CfgFunctions {
 			class patrol {};
 			class reportTargets {};
 			class returnToOrigin {};
-			class startStateMachine {};
 			class theNudge {};
 			class trackEngagement {};
-			class zeusEH {};
 			class zeusSelection {};
 		};
 	};
