@@ -6,7 +6,6 @@ params ["_respondingGroups"];
 {
 	private _group = _x;
 	private _target = _group getVariable "SAA_target";
-	_group reveal _target;
 	private _targetPos = getPos _target;
 
 	_group setVariable ["SAA_available",false];
@@ -24,8 +23,10 @@ params ["_respondingGroups"];
 
 				if (alive _driver && _driver in units _group) then {
 					_vehicles pushBackUnique _vehicle;
-					if (_vehicle isKindOf "Helicopter") then {_vehicle flyInHeight 140;};
-					//if (_vehicle isKindOf "Car" || _vehicle isKindOf "Tank") then {};
+					if (_vehicle isKindOf "Helicopter") then {
+						_vehicle flyInHeight 140;
+						_group reveal _target;
+					};
 				};
 			} else {
 				_infantry pushBack _x
@@ -54,7 +55,7 @@ params ["_respondingGroups"];
 		_group call SAA_fnc_theNudge;
 	} else {
 		private _leader = leader _group;
-		private _flankPos = _target getPos [200,(_target getDir _leader) + ([-90,90] select (random 1 < 0.5))];
+		private _flankPos = _target getPos [200,_target getDir _leader + ([-90,90] select (random 1 < 0.5))];
 
 		[_group,_flankPos,0,"MOVE","AWARE","GREEN","FULL","WEDGE",["true","
 			{

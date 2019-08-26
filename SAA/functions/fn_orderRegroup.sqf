@@ -6,7 +6,6 @@ params ["_respondingGroups","_side","_regroupPos"];
 {
 	private _group = _x;
 	private _target = _group getVariable "SAA_target";
-	_group reveal _target;
 	private _targetPos = getPos _target;
 
 	_group setVariable ["SAA_available",false];
@@ -25,8 +24,10 @@ params ["_respondingGroups","_side","_regroupPos"];
 
 				if (alive _driver && _driver in units _group) then {
 					_vehicles pushBackUnique _vehicle;
-					if (_vehicle isKindOf "Helicopter") then {_vehicle flyInHeight 140;};
-					//if (_vehicle isKindOf "Car" || _vehicle isKindOf "Tank") then {};
+					if (_vehicle isKindOf "Helicopter") then {
+						_vehicle flyInHeight 140;
+						_group reveal _target;
+					};
 				};
 			} else {
 				_infantry pushBack _x
