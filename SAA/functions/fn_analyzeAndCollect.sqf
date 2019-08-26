@@ -29,7 +29,12 @@ if (_group getVariable "SAA_available") then {
 
 // Get the nearest available groups and units
 private _leader = leader _group;
-private _availableGroups = (SAA_AI_GROUPS select {(_x getVariable "SAA_side") isEqualTo _side && {_x getVariable "SAA_available"}}) - [_group];
+private _availableGroups = (allGroups select {
+	!isNil {_x getVariable "SAA_assignment"} && {
+	(_x getVariable "SAA_side") isEqualTo _side && {
+	_x getVariable "SAA_available"
+}}}) - [_group];
+
 if (_availableGroups isEqualTo []) exitWith {[_canEngage,_enemyThreat,0,_respondingGroups]};
 
 private _requestDistance = _group getVariable "SAA_requestDistance";
@@ -37,6 +42,7 @@ private _nearbyGroups = _availableGroups select {
 	private _distance = leader _x distance2D _leader;
 	_distance <= _requestDistance && {_distance <= (_x getVariable "SAA_responseDistance")}
 };
+
 if (_nearbyGroups isEqualTo []) exitWith {[_canEngage,_enemyThreat,0,_respondingGroups]};
 
 private _nearestGroups = _nearbyGroups apply {[leader _x distance2D _leader,_x]};

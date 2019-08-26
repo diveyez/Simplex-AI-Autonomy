@@ -4,9 +4,11 @@ params ["_group"];
 
 (_group getVariable "SAA_origin") params ["_originPos","_originDir"];
 
+_group call SAA_fnc_clearWaypoints;
+
 switch (_group getVariable "SAA_assignment") do {
 	case "FREE" : {
-		{([_group] + _x) call SAA_fnc_addWaypoint;} forEach (_group getVariable "SAA_waypointsCache");
+		{([_group] + _x) call SAA_fnc_addWaypoint} forEach (_group getVariable "SAA_waypointsCache");
 	};
 	case "GARRISON" : {
 		[_group,_originPos,0,"MOVE","AWARE","GREEN","NORMAL","WEDGE",["true","
@@ -16,12 +18,7 @@ switch (_group getVariable "SAA_assignment") do {
 	case "PATROL" : {
 		switch (_group getVariable "SAA_routeType") do {
 			case 0 : {_group call SAA_fnc_patrol;};
-			case 1 : {
-				{
-					_x params ["_pos","type","_behaviour","_combatMode","_speed","_formation","_statements","_timeout","_completionRadius"];
-					[_group,_pos,0,_type,_behaviour,_combatMode,_speed,_formation,_statements,_timeout,_completionRadius] call SAA_fnc_addWaypoint;
-				} forEach (_group getVariable "SAA_waypointsCache");
-			};
+			case 1 : {{([_group] + _x) call SAA_fnc_addWaypoint} forEach (_group getVariable "SAA_waypointsCache");};
 		};
 	};
 	case "QRF" : {
@@ -50,7 +47,7 @@ switch (_group getVariable "SAA_assignment") do {
 	case "SENTRY" : {
 		// Try to get units facing the same way they were originally
 		[_group,_originPos getPos [12,_originDir - 180],0,"MOVE","AWARE","GREEN","NORMAL","WEDGE",["true","
-					(group this) setFormDir ((group this) getVariable 'SAA_origin') # 1;
+			(group this) setFormDir ((group this) getVariable 'SAA_origin') # 1;
 		"],[0,0,0],0] call SAA_fnc_addWaypoint;
 		[_group,_originPos,0,"MOVE","AWARE","GREEN","NORMAL","WEDGE",["true","
 			(group this) setFormDir ((group this) getVariable 'SAA_origin') # 1;

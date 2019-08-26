@@ -60,7 +60,4 @@ params ["_groups","_assignment","_requestDistance","_responseDistance","_extraPa
 	};
 } forEach _groups;
 
-SAA_AI_GROUPS append _groups;
-publicVariable "SAA_AI_GROUPS";
-
 SAA_DEBUG_2("%1 Groups Added: %2",_assignment,_groups)

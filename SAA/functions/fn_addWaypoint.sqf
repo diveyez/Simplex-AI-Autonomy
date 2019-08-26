@@ -14,6 +14,7 @@ params [
 	["_completionRadius",0,[0]]
 ];
 
+if (_position isEqualTo []) exitWith {};
 if (_target isEqualType objNull) then {_target = group _target;};
 if (_behaviour isEqualTo "") then {_behaviour = "UNCHANGED";};
 if (_combatMode isEqualTo "") then {_combatMode = "NO CHANGE";};

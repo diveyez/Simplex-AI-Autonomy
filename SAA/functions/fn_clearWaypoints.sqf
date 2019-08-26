@@ -4,7 +4,7 @@ params ["_group",["_cacheWaypoints",false,[false]]];
 
 if (_cacheWaypoints) then {
 	_group setVariable ["SAA_waypointsCache",(waypoints _group) apply {[
-		waypointPosition _x,waypointType _x,
+		waypointPosition _x,0,waypointType _x,
 		waypointBehaviour _x,waypointCombatMode _x,
 		waypointSpeed _x,waypointFormation _x,
 		waypointStatements _x,waypointTimeout _x,
@@ -12,7 +12,7 @@ if (_cacheWaypoints) then {
 	]}];
 };
 
-{deleteWaypoint [_group,0]; false} count (waypoints _group);
+{deleteWaypoint [_group,0]} forEach (waypoints _group);
 
 // Select an alive unit as leader
 private _leader = leader _group;
@@ -22,7 +22,7 @@ if (!alive _leader) then {
 };
 
 _group enableAttack true;
-{_x setUnitPos "AUTO"; false} count (units _group);
+{_x setUnitPos "AUTO"} forEach (units _group);
 
 // Halt movement to old waypoint
 private _WP = [_group,getPos _leader,0,"MOVE","","","","",["true",""],[0,0,0],10] call SAA_fnc_addWaypoint;
