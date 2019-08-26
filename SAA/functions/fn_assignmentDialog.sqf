@@ -23,7 +23,14 @@ switch (_assignment) do {
 				["Responsive","Units garrison until engaged or requested"],
 				["Repositioning","Units move around the area when engaged. Will not respond to requests"],
 				["Static","Units remain stationary. Will not respond to requests"]
-			],0]],
+			],0],true,{
+				if ((_this # 0) in [1,2]) then {
+					[3,{false}] call SAA_CDS_fnc_setEnableCondition;
+				} else {
+					[3,{true}] call SAA_CDS_fnc_setEnableCondition;
+				};
+			}],
+			["CHECKBOX",["Teleport to positions","Teleports units into garrison positions"],true],
 			DEFAULT_DIALOG_OPTIONS
 		],{DIALOG_CONFIRM},{DIALOG_CANCEL},[_assignment,_groups]] call SAA_CDS_fnc_dialog;
 	};

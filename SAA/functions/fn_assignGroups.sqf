@@ -11,26 +11,34 @@ params ["_groups","_assignment","_requestDistance","_responseDistance","_extraPa
 	_x setVariable ["SAA_side",side _x,true];
 	_x setVariable ["SAA_targetsToReport",[],true];
 	_x setVariable ["SAA_target",objNull,true];
-	_x setVariable ["SAA_available",true,true];
 
 	switch (_assignment) do {
-		case "FREE" : {};
+		case "FREE" : {_x setVariable ["SAA_available",true,true];};
 		case "GARRISON" : {
-			_extraParams params ["_garrisonType"];
+			_extraParams params ["_teleport","_garrisonType"];
+
+			if (_garrisonType in [1,2]) then {
+				_x setVariable ["SAA_available",false,true];
+			} else {
+				_x setVariable ["SAA_available",true,true];
+			};
 
 			_x setVariable ["SAA_garrisonType",_garrisonType,true];
-			[{_this call SAA_fnc_garrison},_x,2] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
+			[{_this call SAA_fnc_garrison},[_x,_teleport],2] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
 		};
 		case "PATROL" : {
 			_extraParams params ["_routeStyle","_routeType","_patrolRadius"];
 
+			_x setVariable ["SAA_available",true,true];
+
 			_x setVariable ["SAA_patrolRadius",parseNumber _patrolRadius,true];
 			_x setVariable ["SAA_routeType",_routeType,true];
 			_x setVariable ["SAA_routeStyle",_routeStyle,true];
-
 			_x call SAA_fnc_patrol;
 		};
 		case "QRF" : {
+			_x setVariable ["SAA_available",true,true];
+
 			[{
 				private _vehicles = [];
 				private _infantry = [];
@@ -48,7 +56,7 @@ params ["_groups","_assignment","_requestDistance","_responseDistance","_extraPa
 				} forEach _infantry;
 			},_x,2] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
 		};
-		case "SENTRY" : {};
+		case "SENTRY" : {_x setVariable ["SAA_available",true,true];};
 	};
 } forEach _groups;
 

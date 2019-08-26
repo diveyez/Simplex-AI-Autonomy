@@ -6,7 +6,7 @@ _args params ["_assignment","_groups"];
 reverse _dialogResults;
 _dialogResults params ["_transferToServer","_responseDistance","_requestDistance"];
 private _extraParams = switch (_assignment) do {
-	case "GARRISON" : {_dialogResults # 3};
+	case "GARRISON" : {[_dialogResults # 3,_dialogResults # 4]};
 	case "PATROL" : {[_dialogResults # 3,_dialogResults # 4,_dialogResults # 5]};
 	default {[]};
 };

@@ -37,3 +37,5 @@ if (!(_targetsToReport isEqualTo []) && _group getVariable ["SAA_notReporting",t
 	} count (_x nearEntities 25);
 	false
 } count _newTargets;
+
+nil
