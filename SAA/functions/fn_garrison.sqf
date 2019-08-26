@@ -1,46 +1,24 @@
 #include "script_component.hpp"
 
-params ["_group"];
+params ["_group",["_teleport",false,[false]]];
 
-// TO-DO
-/*
-params [["_group",grpNull,[grpNull]],["_teleport",false,[false]]];
-
-_group setVariable ["ZAAC_grpStatus",2];
 _group enableAttack false;
 
 private _startPos = getPos (leader _group);
 private _units = (units _group) select {alive _x};
-private _buildingsIndex = ((nearestObjects [_startPos,["Building"],50,true]) apply {_x buildingPos -1}) select {count _x > 0};
+private _buildingPositions = [];
+{_buildingPositions append ([_x] call CBA_fnc_buildingPositions)} forEach (nearestObjects [_startPos,["Building"],50,true]);
 
 {
-	_x setVariable ["ZAAC_garrisonDone",false];
+	_unit setVariable ["SAA_garrisonDone",nil];
 
 	if (vehicle _x isKindOf "CAManBase") then {
 		private "_position";
-		if (count _buildingsIndex > 0) then {
-			private _building = [_buildingsIndex # 0,selectRandom _buildingsIndex] select (random 1 < 0.5);
-			_position = _building deleteAt (floor random (count _building));
-
-			// Try not to pick positions already occupied
-			private _obstructions = _position nearEntities ["CAManBase",2];
-			if (count _obstructions > 0) then {
-				while {
-					if (_building isEqualTo []) then {
-						_buildingsIndex = _buildingsIndex select {count _x > 0};
-					};
-					if (count _buildingsIndex > 0) then {
-						_building = [_buildingsIndex # 0,selectRandom _buildingsIndex] select (random 1 < 0.5);
-						_position = _building deleteAt (floor random (count _building));
-						_obstructions = _position nearEntities ["CAManBase",2];
-					};
-					(count _buildingsIndex > 0) && (count _obstructions > 0)
-				} do {};
-			};
-
-			if (_building isEqualTo []) then {
-				_buildingsIndex = _buildingsIndex select {count _x > 0};
-			};
+		if !(_buildingPositions isEqualTo []) then {
+			while {
+				_position = _buildingPositions deleteAt (floor random (count _buildingPositions));
+				!(_buildingPositions isEqualTo []) && !((_position nearEntities ["CAManBase",2]) isEqualTo [])
+			} do {};
 
 			_x setUnitPos "UP";
 		} else {
@@ -51,53 +29,85 @@ private _buildingsIndex = ((nearestObjects [_startPos,["Building"],50,true]) app
 		if (_teleport) then {
 			_x setPos _position;
 			doStop _x;
-			_x setVariable ["ZAAC_garrisonDone",true];
 		} else {
+			_x setVariable ["SAA_garrisonDone",false];
 			_x doMove _position;
-			[_x,_position] spawn {
-				params ["_unit","_pos"];
-				waitUntil {unitReady _unit || {_unit distance _pos < 3}};
-				doStop _unit;
-				_unit setVariable ["ZAAC_garrisonDone",true];
-			};
+			[{
+				params ["_unit","_pos","_group"];
+
+				if (_group getVariable "SAA_garrisonType" isEqualTo 0 && {!(_group getVariable "SAA_available")}) exitWith {true};
+				if (!alive _unit || unitReady _unit || {_unit distance _pos < 3}) then {
+					doStop _unit;
+					_unit setVariable ["SAA_garrisonDone",true];
+					true
+				} else {false};
+			},{},[_x,_position,_group]] call CBA_fnc_waitUntilAndExecute;
 		};
 	} else {
-		// Handle vehicles
-		doStop _x;
-		_x setVariable ["ZAAC_garrisonDone",true];
+		doStop _x; // stop vehicles
 	};
-	false
-} count _units;
+} forEach _units;
 
-switch (_group getVariable "ZAAC_grpRole") do {
-	case "GARRISON" : {
+// 0 : Responsive 		- Units garrison until engaged or requested
+// 1 : Repositioning 	- Units move around the area when engaged. Will not respond to requests
+// 2 : Static 			- Units remain stationary. Will not respond to requests
+switch (_group getVariable ["SAA_garrisonType",0]) do {
+	case 0 : {};
+	case 1 : {
 		[{
-			({[true,false] select (_x getVariable ["ZAAC_garrisonDone",true])} count (_this # 1)) isEqualTo 0
-		},{
-			(_this # 0) setVariable ["ZAAC_grpStatus",0];
-		},[_group,_units]] call CBA_fnc_waitUntilAndExecute;
-	};
-	case "FORTIFY" : {
-		[{
-			({[true,false] select (_x getVariable ["ZAAC_garrisonDone",true])} count (_this # 1)) isEqualTo 0
+			({!alive _x || _x getVariable ["SAA_garrisonDone",true]} count (_this # 1)) isEqualTo count (_this # 1)
 		},{
 			private _group = _this # 0;
+			private _units = (units _group) select {alive _x};
+			if (_units isEqualTo []) exitWith {};
 
-			// Select an alive unit as leader
 			private _leader = leader _group;
-			if !(alive _leader) then {
+			if (!alive _leader) then {
 				_leader = _units # 0;
 				_group selectLeader _leader;
 			};
 
-			_group setVariable ["ZAAC_grpFortifyReact",false];
-			private _EHID = (leader _group) addEventHandler ["FiredNear",{
+			[_leader,"FiredNear",{
 				private _leader = _this # 0;
-				(group _leader) setVariable ["ZAAC_grpFortifyReact",true];
-				_leader removeEventHandler ["FiredNear",(group _leader) getVariable "ZAAC_grpFortifyEHID"];
-			}];
-			_group setVariable ["ZAAC_grpFortifyEHID",_EHID];
+				private _group = _thisArgs;
+
+				_leader removeEventHandler [_thisType,_thisID];
+
+				private _waitTime = [5 + round random 30,600] select (count ((units _group) select {alive _x}) < 4 && random 1 < 0.5);
+
+				[{
+					params ["_leader","_group"];
+
+					private _units = (units _group) select {alive _x};
+					if (_units isEqualTo []) exitWith {};
+
+					if (!alive _leader) then {
+						_leader = _units # 0;
+						_group selectLeader _leader;
+					};
+
+					private _reactingUnits = [_leader];
+					for "_i" from 0 to (floor ((count _units) / (2 + floor random 3))) do {
+						_reactingUnits pushBackUnique (selectRandom _units);
+					};
+
+					_reactingUnits doFollow _leader;
+					{_x setUnitPos "AUTO"} forEach _reactingUnits;
+
+					[_group,(_group getVariable "SAA_origin") # 0,15,"SAD","AWARE","RED","NORMAL","WEDGE",["true",""],[0,0,0],15] call SAA_fnc_addWaypoint;
+					[{
+						_this call SAA_fnc_clearWaypoints;
+						_this call SAA_fnc_returnToOrigin;
+					},_group,180 + round random 60] call CBA_fnc_waitAndExecute;
+				},[_leader,_group],_waitTime] call CBA_fnc_waitAndExecute;
+			},group _leader] call CBA_fnc_addBISEventHandler;
+		},[_group,_units]] call CBA_fnc_waitUntilAndExecute;
+	};
+	case 2 : {
+		[{
+			({!alive _x || _x getVariable ["SAA_garrisonDone",true]} count (_this # 1)) isEqualTo count (_this # 1)
+		},{
+			{_x disableAI "PATH"} forEach (_this # 1);
 		},[_group,_units]] call CBA_fnc_waitUntilAndExecute;
 	};
 };
-*/
