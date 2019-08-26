@@ -6,7 +6,13 @@ class CfgPatches {
 		author = "Sceptre";
 		authors[] = {"Sceptre"};
 		url = "https://github.com/SceptreOfficial/Simplex-AI-Autonomy";
-		units[] = {};
+		units[] = {
+			"SAA_Module_AssignFree",
+			"SAA_Module_AssignGarrison",
+			"SAA_Module_AssignPatrol",
+			"SAA_Module_AssignQRF",
+			"SAA_Module_AssignSentry"
+		};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;
 		requiredAddons[] = {
@@ -16,8 +22,6 @@ class CfgPatches {
 			"cba_settings",
 			"cba_statemachine",
 			"cba_xeh",
-			"zen_common",
-			"zen_custom_modules"
 		};
 		VERSION_CONFIG;
 	};
@@ -26,5 +30,7 @@ class CfgPatches {
 
 #include "CDS\gui.hpp"
 #include "CfgEventHandlers.hpp"
+#include "CfgFactionClasses.hpp"
 #include "CfgFunctions.hpp"
 #include "CfgSounds.hpp"
+#include "CfgVehicles.hpp"

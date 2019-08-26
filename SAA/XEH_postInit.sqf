@@ -16,7 +16,3 @@ if (isServer) then {
 	}] call CBA_fnc_addEventHandler;
 	*/
 };
-
-if (!hasInterface) exitWith {};
-
-call SAA_fnc_zeusModules;

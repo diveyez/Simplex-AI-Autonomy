@@ -14,6 +14,7 @@ class CfgFunctions {
 			class garrison {};
 			class getAmmoUsageFlags {};
 			class getTypes {};
+			class moduleAssign {};
 			class orderAttack {};
 			class orderRegroup {};
 			class patrol {};
@@ -23,7 +24,6 @@ class CfgFunctions {
 			class theNudge {};
 			class trackEngagement {};
 			class zeusEH {};
-			class zeusModules {};
 			class zeusSelection {};
 		};
 	};
