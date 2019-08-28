@@ -60,15 +60,7 @@ if (_respondingGroups isEqualTo []) exitWith {
 	// Check for new unknown targets
 	private _unknownTargets = _targets select {
 		private _target = _x;
-		{
-			_x knowsAbout _target > 0.5
-			//if (_x knowsAbout _target > 0.5) then {
-			//	_target setVariable [format ["SAA_LKP_%1",_side],getPos _target,true];
-			//	true
-			//} else {
-			//	false
-			//};
-		} count _respondingGroups isEqualTo 0
+		{_x knowsAbout _target > 0.5} count _respondingGroups isEqualTo 0
 	};
 	_this setVariable ["SAA_unknownTargets",_unknownTargets];
 	private _knownTargets = _targets - _unknownTargets;

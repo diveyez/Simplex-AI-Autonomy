@@ -11,7 +11,6 @@ if (_targetsToReport isEqualTo []) exitWith {};
 
 // Report targets
 missionNamespace setVariable [format ["SAA_targets_%1",_side],_sideTargets + _targetsToReport,true];
-//{_x setVariable [format ["SAA_LKP_%1",_side],getPos _x,true]} forEach _targetsToReport;
 SAA_DEBUG_2("%1 - new targets: %2",_side,_targetsToReport)
 
 // Flares
