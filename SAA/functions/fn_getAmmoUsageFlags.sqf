@@ -27,7 +27,6 @@ Array of usage flags as strings
 //-----------------------------------------------------------------------------------------------*/
 params [["_class","",[""]]];
 
-private _allUsageFlags = ["0","1","2","4","8","16","32","64","128","256","512"];
 private _usageFlags = [];
 private _cfgAmmoClass = switch true do {
 	case (isClass (configFile >> "CfgAmmo" >> _class)) : {configFile >> "CfgAmmo" >> _class};
@@ -35,9 +34,9 @@ private _cfgAmmoClass = switch true do {
 		private _ammo = getText (configFile >> "CfgMagazines" >> _class >> "ammo");
 		configFile >> "CfgAmmo" >> _ammo
 	};
-	default {nil};
+	default {configNull};
 };
-if (isNil "_cfgAmmoClass") exitWith {[]};
+if (isNull _cfgAmmoClass) exitWith {[]};
 
 private _flags = _cfgAmmoClass >> "aiAmmoUsageFlags";
 if (!isNull _flags) then {
@@ -57,7 +56,7 @@ if (_usageFlags isEqualTo []) then {
 	if (!isNull _submunitionAmmo && {isText _submunitionAmmo}) then {
 		private _subAmmoClass = getText _submunitionAmmo;
 		if !(_subAmmoClass isEqualTo "") then {
-			private _flags = (configFile >> "CfgAmmo" >> _subAmmoClass >> "aiAmmoUsageFlags");
+			private _flags = configFile >> "CfgAmmo" >> _subAmmoClass >> "aiAmmoUsageFlags";
 			if (!isNull _flags) then {
 				private _values = switch true do {
 					case (isText _flags) : {(getText _flags) splitString "+ "};
