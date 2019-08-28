@@ -34,7 +34,7 @@ if (_transferToServer) exitWith {
 			} forEach units _x;
 		} forEach (_this # 0);
 
-		_this call SAA_fnc_assignGroups;
+		_this remoteExecCall ["SAA_fnc_assignGroups",2];
 	},[_groups,_assignment,_requestDistance,_responseDistance,_extraParams]] call CBA_fnc_waitUntilAndExecute;
 };
 
