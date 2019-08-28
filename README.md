@@ -15,7 +15,6 @@ For usage instructions, please see the [wiki](https://github.com/SceptreOfficial
 **Requirements**
 
 - CBA_A3: https://steamcommunity.com/sharedfiles/filedetails/?id=450814997
-- ZEN
 
 **Download**
 
