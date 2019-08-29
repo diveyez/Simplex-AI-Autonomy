@@ -1,11 +1,26 @@
 #include "script_component.hpp"
 
-SAA_targets_EAST = [];
-SAA_targets_GUER = [];
-SAA_targets_WEST = [];
+//-----------------------------------------------------------------------------------------------//
 
-SAA_setting_flaresEnabled = true;
-SAA_enableDebug = false;
+["SAA_setting_flaresEnabled","CHECKBOX",
+	["Give UAV Terminal on drone request","Gives CAS Drone requesters a UAV terminal if they don't have one"],
+	"Simplex AI Autonomy",
+	true, // _valueInfo
+	true, // _isGlobal
+	{},
+	false // _needRestart
+] call CBA_fnc_addSetting;
+
+["SAA_setting_enableDebug","CHECKBOX",
+	"Enable Debug",
+	["Simplex AI Autonomy","Development"],
+	false, // _valueInfo
+	false, // _isGlobal
+	{},
+	false // _needRestart
+] call CBA_fnc_addSetting;
+
+//-----------------------------------------------------------------------------------------------//
 
 ["ModuleCurator_F","init",{
 	params ["_zeus"];

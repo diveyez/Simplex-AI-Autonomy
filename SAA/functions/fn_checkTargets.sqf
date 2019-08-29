@@ -5,13 +5,7 @@ private _targets = (leader _group) targets [true];
 if (_targets isEqualTo []) exitWith {};
 
 private _targetsToReport = _group getVariable "SAA_targetsToReport";
-private _sideTargets = switch (side _group) do {
-	case east : {SAA_targets_EAST};
-	case independent : {SAA_targets_GUER};
-	case west : {SAA_targets_WEST};
-	default {[]};
-};
-
+private _sideTargets = missionNamespace getVariable [format ["SAA_targets_%1",side _group],[]];
 private _newtargets = (_targets - _sideTargets - _targetsToReport) select {
 	(_group knowsAbout _x) > 0.5 && {!(vehicle _x isKindOf "Air") && !(vehicle _x isKindOf "Ship") && ({alive _x} count crew _x) != 0}
 };

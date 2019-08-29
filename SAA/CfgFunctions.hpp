@@ -9,7 +9,6 @@ class CfgFunctions {
 			class assignmentDialog {};
 			class assignmentDialogConfirm {};
 			class checkTargets {};
-			class cleanupTargets {};
 			class clearWaypoints {};
 			class garrison {};
 			class getAmmoUsageFlags {};

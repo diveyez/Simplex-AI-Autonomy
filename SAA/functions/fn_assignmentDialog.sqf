@@ -5,7 +5,7 @@
 #define DEFAULT_DIALOG_OPTIONS \
 	["SLIDER",["Assistance request distance","Group(s) will request assistance from other groups within this distance"],[[0,5000,0],600]], \
 	["SLIDER",["Max assistance response distance","Group(s) will only respond to assistance requests that are within this distance"],[[0,5000,0],600]], \
-	["CHECKBOX",["Transfer to server","Transfers group locality to the server"],true,false,{},{false}]
+	["CHECKBOX",["Transfer to server","Transfers group locality to the server"],true,false]
 
 params [["_assignment","",[""]],["_input",grpNull,[grpNull,[]]]];
 
@@ -48,7 +48,7 @@ switch (_assignment) do {
 		["Assign QRF Group(s)",[
 			["SLIDER",["Assistance request distance","Group(s) will request assistance from other groups within this distance"],[[0,5000,0],600]],
 			["SLIDER",["Max assistance response distance","QRF respond to all requests"],[[0,5000,0],5000],true,{},{false}],
-			["CHECKBOX",["Transfer to server","Transfers group locality to the server"],true,false,{},{false}]
+			["CHECKBOX",["Transfer to server","Transfers group locality to the server"],true,false]
 		],{DIALOG_CONFIRM},{DIALOG_CANCEL},[_assignment,_groups]] call SAA_CDS_fnc_dialog;
 	};
 	case "SENTRY" : {

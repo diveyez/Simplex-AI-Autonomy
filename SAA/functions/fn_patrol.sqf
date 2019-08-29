@@ -28,7 +28,7 @@ switch (_group getVariable "SAA_routeType") do {
 					private _position = _originPos getPos [_patrolRadius,_dir];
 					_dir = _dir + 60;
 					if (_i != 6) then {
-						private _WP = [_group,_position,0,"MOVE","SAFE","GREEN","LIMITED",_formation,["true",""],[4,6,8],10] call SAA_fnc_addWaypoint;
+						[_group,_position,0,"MOVE","SAFE","GREEN","LIMITED",_formation,["true",""],[4,6,8],10] call SAA_fnc_addWaypoint;
 						if (_i isEqualTo 0) then {
 							_group call SAA_fnc_theNudge;
 						};
@@ -44,7 +44,7 @@ switch (_group getVariable "SAA_routeType") do {
 					private _position = _originPos getPos [_patrolRadius,_dir];
 					_dir = _dir - 60;
 					if (_i != 6) then {
-						private _WP = [_group,_position,0,"MOVE","SAFE","GREEN","LIMITED",_formation,["true",""],[4,6,8],10] call SAA_fnc_addWaypoint;
+						[_group,_position,0,"MOVE","SAFE","GREEN","LIMITED",_formation,["true",""],[4,6,8],10] call SAA_fnc_addWaypoint;
 						if (_i isEqualTo 0) then {
 							_group call SAA_fnc_theNudge;
 						};
