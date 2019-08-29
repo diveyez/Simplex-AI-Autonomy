@@ -21,7 +21,7 @@ private _QRFRatio = _assistRatio * QRF_MULTIPLIER;
 // Add the reporting group if it's free
 if (_group getVariable "SAA_available") then {
 	_respondingGroups pushBack _group;
-	_group setVariable ["SAA_target",selectRandom _targets];
+	_group setVariable ["SAA_target",selectRandom _targets,true];
 	([units _group,true] call SAA_fnc_getTypes) params ["_infantry","_tanks","_cars","_helis","_groupAT"];
 	_strength = _strength + count _infantry + count _tanks * RATING_TANK + count _cars * RATING_CAR + count _helis * RATING_HELI;
 	_canEngage = count _groupAT >= count _enemyTanks;
@@ -78,7 +78,7 @@ if !(_enemyTanks isEqualTo []) then {
 			private _grp = group (_nearestAT deleteAt 0);
 			private _idx = _respondingGroups pushBackUnique _grp;
 			if (_idx != -1) then {
-				_grp setVariable ["SAA_target",_x];
+				_grp setVariable ["SAA_target",_x,true];
 				([units _grp,false] call SAA_fnc_getTypes) params ["_infantry","_tanks","_cars","_helis"];
 				_strength = _strength + count _infantry + count _tanks * RATING_TANK + count _cars * RATING_CAR + count _helis * RATING_HELI;
 				if (!_canEngage) then {_canEngage = leader _grp distance _leader < 400;};
@@ -88,7 +88,7 @@ if !(_enemyTanks isEqualTo []) then {
 			private _grp = group (_nearestTanks deleteAt 0);
 			private _idx = _respondingGroups pushBackUnique _grp;
 			if (_idx != -1) then {
-				_grp setVariable ["SAA_target",_x];
+				_grp setVariable ["SAA_target",_x,true];
 				([units _grp,false] call SAA_fnc_getTypes) params ["_infantry","_tanks","_cars","_helis"];
 				_strength = _strength + count _infantry + count _tanks * RATING_TANK + count _cars * RATING_CAR + count _helis * RATING_HELI;
 				if (!_canEngage) then {_canEngage = leader _grp distance _leader < 400;};
@@ -107,7 +107,7 @@ if !(_availableQRF isEqualTo []) then {
 		if (_strength >= _QRFRatio) exitWith {};
 		private _idx = _respondingGroups pushBackUnique _x;
 		if (_idx != -1) then {
-			_x setVariable ["SAA_target",selectRandom _targets];
+			_x setVariable ["SAA_target",selectRandom _targets,true];
 			([units _x,false] call SAA_fnc_getTypes) params ["_infantry","_tanks","_cars","_helis"];
 			_strength = _strength + count _infantry + count _tanks * RATING_TANK + count _cars * RATING_CAR + count _helis * RATING_HELI;
 		};
@@ -120,7 +120,7 @@ if !(_nearestGroups isEqualTo []) then {
 		if (_strength >= _assistRatio) exitWith {};
 		private _idx = _respondingGroups pushBackUnique _x;
 		if (_idx != -1) then {
-			_x setVariable ["SAA_target",selectRandom _targets];
+			_x setVariable ["SAA_target",selectRandom _targets,true];
 			([units _x,false] call SAA_fnc_getTypes) params ["_infantry","_tanks","_cars","_helis"];
 			_strength = _strength + count _infantry + count _tanks * RATING_TANK + count _cars * RATING_CAR + count _helis * RATING_HELI;
 		};

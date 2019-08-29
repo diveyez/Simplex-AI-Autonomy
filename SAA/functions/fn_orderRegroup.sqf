@@ -8,7 +8,7 @@ params ["_respondingGroups","_side","_regroupPos"];
 	private _target = _group getVariable "SAA_target";
 	private _targetPos = getPos _target;
 
-	_group setVariable ["SAA_available",false];
+	_group setVariable ["SAA_available",false,true];
 	[_group,true] call SAA_fnc_clearWaypoints;
 	{_x disableAI "AUTOCOMBAT"} forEach units _group;
 

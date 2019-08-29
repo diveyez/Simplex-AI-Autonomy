@@ -25,7 +25,8 @@ _group enableAttack true;
 {_x setUnitPos "AUTO"} forEach (units _group);
 
 // Halt movement to old waypoint
-private _WP = [_group,getPos _leader,0,"MOVE","","","","",["true",""],[0,0,0],10] call SAA_fnc_addWaypoint;
+private _WP = _group addWaypoint [getPos _leader,0,0];
+_WP setWaypointType "MOVE";
 _group setCurrentWaypoint _WP;
 _leader doMove (waypointPosition _WP);
 (units _group) doFollow _leader;

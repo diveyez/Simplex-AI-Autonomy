@@ -15,7 +15,7 @@ if (_transferToServer) exitWith {
 	// Save loadout
 	{
 		if (!local _x) then {
-			{_x setVariable ["SAA_loadout",getUnitLoadout _x];} forEach units _x;
+			{_x setVariable ["SAA_loadout",getUnitLoadout _x]} forEach units _x;
 			_x setGroupOwner 2;
 		};
 	} forEach _groups;
@@ -29,12 +29,15 @@ if (_transferToServer) exitWith {
 		// Apply loadout
 		{
 			{
-				_x setUnitLoadout (_x getVariable "SAA_loadout");
-				_x setVariable ["SAA_loadout",nil];
+				private _loadout = _x getVariable "SAA_loadout";
+				if (!isNil "_loadout") then {
+					_x setUnitLoadout _loadout;
+					_x setVariable ["SAA_loadout",nil];
+				};
 			} forEach units _x;
 		} forEach (_this # 0);
 
-		_this remoteExecCall ["SAA_fnc_assignGroups",2];
+		_this call SAA_fnc_assignGroups;
 	},[_groups,_assignment,_requestDistance,_responseDistance,_extraParams]] call CBA_fnc_waitUntilAndExecute;
 };
 

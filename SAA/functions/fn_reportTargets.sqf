@@ -4,14 +4,13 @@ private _group = _this;
 if (isNull _group || {({alive _x} count units _group) isEqualTo 0}) exitWith {};
 
 private _side = _group getVariable "SAA_side";
-private _sideTargets = missionNamespace getVariable format ["SAA_targets_%1",_side];
-private _targetsToReport = ((_group getVariable "SAA_targetsToReport") select {({alive _x} count crew _x) != 0}) - _sideTargets;
+private _sideTargets = missionNamespace getVariable [format ["SAA_targets_%1",_side],[]];
+private _newTargets = ((_group getVariable "SAA_targetsToReport") select {({alive _x} count crew _x) != 0}) - _sideTargets;
 _group setVariable ["SAA_targetsToReport",[]];
-if (_targetsToReport isEqualTo []) exitWith {};
+if (_newTargets isEqualTo []) exitWith {};
 
 // Report targets
-missionNamespace setVariable [format ["SAA_targets_%1",_side],_sideTargets + _targetsToReport,true];
-SAA_DEBUG_2("%1 - new targets: %2",_side,_targetsToReport)
+["SAA_reportTargets",[_side,_newTargets]] call CBA_fnc_serverEvent;
 
 // Flares
 if (SAA_setting_flaresEnabled && sunOrMoon < 1) then {
@@ -21,11 +20,11 @@ if (SAA_setting_flaresEnabled && sunOrMoon < 1) then {
 			_flare setPosATL [(getPosATL _flare) # 0,(getPosATL _flare) # 1,180 + random 60];
 			_flare setVelocity [0,0,-0.05];
 		};
-	},_targetsToReport,10 + round random 15] call CBA_fnc_waitAndExecute;
+	},_newTargets,10 + round random 15] call CBA_fnc_waitAndExecute;
 };
 
 // Process how to handle new targets
-([_group,_side,_targetsToReport] call SAA_fnc_analyzeAndCollect) params ["_canEngage","_enemyThreat","_immediateStrength","_respondingGroups"];
+([_group,_side,_newTargets] call SAA_fnc_analyzeAndCollect) params ["_canEngage","_enemyThreat","_immediateStrength","_respondingGroups"];
 
 if !(_respondingGroups isEqualTo []) then {
 	if (_canEngage && _enemyThreat <= _immediateStrength) then {
@@ -39,4 +38,4 @@ if !(_respondingGroups isEqualTo []) then {
 };
 
 // Track engagement so targets can be eligible for re-detection
-[{_this call SAA_fnc_trackEngagement},[_side,_respondingGroups,_targetsToReport],60] call CBA_fnc_waitAndExecute;
+["SAA_engagementStarted",[_side,_respondingGroups,_newTargets]] call CBA_fnc_serverEvent;

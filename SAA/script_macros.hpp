@@ -2,7 +2,7 @@
 
 #define SAA_LOG(MESSAGE) 										private _logMessage = format ["SAA %1",MESSAGE]; diag_log _logMessage; systemChat _logMessage;
 
-#define SAA_DEBUG(MESSAGE) 										if (SAA_enableDebug) then {SAA_LOG(FORMAT_1("Debug: %1",MESSAGE))};
+#define SAA_DEBUG(MESSAGE) 										if (SAA_setting_enableDebug) then {SAA_LOG(FORMAT_1("Debug: %1",MESSAGE))};
 #define SAA_DEBUG_1(MESSAGE,ARG1) 								SAA_DEBUG(FORMAT_1(MESSAGE,ARG1))
 #define SAA_DEBUG_2(MESSAGE,ARG1,ARG2) 							SAA_DEBUG(FORMAT_2(MESSAGE,ARG1,ARG2))
 #define SAA_DEBUG_3(MESSAGE,ARG1,ARG2,ARG3) 					SAA_DEBUG(FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))

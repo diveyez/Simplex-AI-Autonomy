@@ -2,6 +2,11 @@
 
 params ["_groups","_assignment","_requestDistance","_responseDistance","_extraParams"];
 
+if (isNil "SAA_stateMachine") then {
+	SAA_stateMachine = [{allGroups select {local _x && {!isNil {_x getVariable "SAA_assignment"}}}},true] call CBA_statemachine_fnc_create;
+	[SAA_stateMachine,{_this call SAA_fnc_checkTargets},{},{},"CheckTargets"] call CBA_statemachine_fnc_addState;
+};
+
 {
 	_x allowFleeing 0;
 	_x setVariable ["SAA_assignment",_assignment,true];
