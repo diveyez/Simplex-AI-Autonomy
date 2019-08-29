@@ -2,6 +2,6 @@
 *.zip
 *.pbo
 *.biprivatekey
+*.bat
 Thumbs.db
-sync-test-mission.bat
-steam-desc.txt
+desktop.ini
