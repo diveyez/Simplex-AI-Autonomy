@@ -3,7 +3,8 @@
 </p>
 
 <p align="center">
-	<strong>Simplex AI Autonomy</strong>
+	<strong>Simplex AI Autonomy</strong><br />
+	<sup><strong>An AI management system for Arma 3.</strong></sup>
 </p>
 
 <p align="center">
@@ -22,7 +23,7 @@
 
 #### Requirements
 
-- CBA_A3 (https://github.com/CBATeam/CBA_A3)
+- [CBA_A3](https://github.com/CBATeam/CBA_A3)
 
 ### Description
 
