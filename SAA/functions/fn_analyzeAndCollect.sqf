@@ -98,11 +98,8 @@ if !(_enemyTanks isEqualTo []) then {
 };
 
 // Add nearest QRF until ratio satisfied
-private _availableQRF = _availableGroups select {(_x getVariable "SAA_assignment") == "QRF"};
-if !(_availableQRF isEqualTo []) then {
-	private _nearestQRF = _availableQRF apply {[leader _x distance2D _leader,_x]};
-	_nearestQRF sort true;
-
+private _nearestQRF = _nearestGroups select {(_x getVariable "SAA_assignment") == "QRF"};
+if !(_nearestQRF isEqualTo []) then {
 	{
 		if (_strength >= _QRFRatio) exitWith {};
 		private _idx = _respondingGroups pushBackUnique _x;
@@ -111,7 +108,7 @@ if !(_availableQRF isEqualTo []) then {
 			([units _x,false] call SAA_fnc_getTypes) params ["_infantry","_tanks","_cars","_helis"];
 			_strength = _strength + count _infantry + count _tanks * RATING_TANK + count _cars * RATING_CAR + count _helis * RATING_HELI;
 		};
-	} forEach (_nearestQRF apply {_x # 1});
+	} forEach _nearestQRF;
 };
 
 // Add any extra needed groups until ratio satisfied

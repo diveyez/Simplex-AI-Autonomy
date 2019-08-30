@@ -42,15 +42,13 @@ switch (_assignment) do {
 			["COMBOBOX","Patrol route type",[["Random","Cyclical"],0],true,{
 				[2,[{true},{false}] select ((_this # 0) isEqualTo 0)] call SAA_CDS_fnc_setEnableCondition;
 			}],
-			["COMBOBOX","Patrol route style",[["Clockwise Circle","Counter-Clockwise Circle"/*,"Terrain High Points"*/],0]],
+			["COMBOBOX","Patrol route style",[["Clockwise Circle","Counter-Clockwise Circle"],0]],
 			DEFAULT_DIALOG_OPTIONS
 		],{DIALOG_CONFIRM},{DIALOG_CANCEL},[_assignment,_groups]] call SAA_CDS_fnc_dialog;
 	};
 	case "QRF" : {
 		["Assign QRF Group(s)",[
-			["SLIDER",["Assistance request distance","Group(s) will request assistance from other groups within this distance"],[[0,5000,0],600]],
-			["SLIDER",["Max assistance response distance","QRF respond to all requests"],[[0,5000,0],5000],true,{},{false}],
-			["CHECKBOX",["Transfer to server","Transfers group locality to the server"],true,false]
+			DEFAULT_DIALOG_OPTIONS
 		],{DIALOG_CONFIRM},{DIALOG_CANCEL},[_assignment,_groups]] call SAA_CDS_fnc_dialog;
 	};
 	case "SENTRY" : {
