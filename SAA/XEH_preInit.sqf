@@ -31,8 +31,13 @@
 		if (!isNil {_group getVariable "SAA_assignment"}) then {
 			if ((_group getVariable "SAA_assignment") == "FREE" && _group getVariable "SAA_available") exitWith {};
 
-			_group setVariable ["SAA_available",true,true];
-			[_group] remoteExecCall ["SAA_fnc_returnToOrigin",2];
+			if ((_group getVariable "SAA_garrisonType") in [1,2]) then {
+				_group setVariable ["SAA_available",false,true];
+			} else {
+				_group setVariable ["SAA_available",true,true];
+			};
+
+			["SAA_returnToOrigin",_group] call CBA_fnc_serverEvent;
 			SAA_WARNING_1("A waypoint has been deleted. Attempting to reset group: %1",_group)
 		};
 	}];

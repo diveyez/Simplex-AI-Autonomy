@@ -23,6 +23,8 @@ if (isServer) then {
 		params ["_side","_respondingGroups","_newTargets"];
 		[{_this call SAA_fnc_trackEngagement},[_side,_respondingGroups,_newTargets],60] call CBA_fnc_waitAndExecute;
 	}] call CBA_fnc_addEventHandler;
+
+	["SAA_returnToOrigin",{_this call SAA_fnc_returnToOrigin}] call CBA_fnc_addEventHandler;
 };
 
 ["SAA_checkForUnknownTargets",{

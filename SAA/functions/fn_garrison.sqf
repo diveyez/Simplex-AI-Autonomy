@@ -97,7 +97,7 @@ switch (_group getVariable ["SAA_garrisonType",0]) do {
 					[_group,(_group getVariable "SAA_origin") # 0,15,"SAD","AWARE","RED","NORMAL","WEDGE",["true",""],[0,0,0],15] call SAA_fnc_addWaypoint;
 					[{
 						_this call SAA_fnc_clearWaypoints;
-						_this call SAA_fnc_returnToOrigin;
+						["SAA_returnToOrigin",_this] call CBA_fnc_serverEvent;
 					},_group,180 + round random 60] call CBA_fnc_waitAndExecute;
 				},[_leader,_group],_waitTime] call CBA_fnc_waitAndExecute;
 			},group _leader] call CBA_fnc_addBISEventHandler;

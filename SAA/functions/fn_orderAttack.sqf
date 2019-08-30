@@ -50,7 +50,7 @@ params ["_respondingGroups"];
 		[_group,_targetPos,0,"SAD","AWARE","YELLOW","NORMAL","WEDGE",["
 			(group this) getVariable 'SAA_available'
 		","
-			(group this) call SAA_fnc_returnToOrigin;
+			['SAA_returnToOrigin',group this] call CBA_fnc_serverEvent;
 		"],[0,0,0],_completionRadius] call SAA_fnc_addWaypoint;
 		_group call SAA_fnc_theNudge;
 	} else {
@@ -68,7 +68,7 @@ params ["_respondingGroups"];
 		[_group,_targetPos,0,"SAD","AWARE","YELLOW","NORMAL","WEDGE",["
 			(group this) getVariable 'SAA_available'
 		","
-			(group this) call SAA_fnc_returnToOrigin;
+			['SAA_returnToOrigin',group this] call CBA_fnc_serverEvent;
 		"],[0,0,0],10] call SAA_fnc_addWaypoint;
 		_group call SAA_fnc_theNudge;
 	};
