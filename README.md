@@ -27,7 +27,7 @@
 
 ### Description
 
-**Simplex AI Autonomy** is an AI management system for Arma 3.
+**Simplex AI Autonomy** is an AI management system designed to help zeus setup quick scenarios and not need to micro-manage AI. Once an AI group is assigned a certain role, the management system will make the AI fulfill that role, respond to enemy threats, and request assistance where needed.
 
 For usage instructions, please see the [wiki](https://github.com/SceptreOfficial/Simplex-AI-Autonomy/wiki).
 
