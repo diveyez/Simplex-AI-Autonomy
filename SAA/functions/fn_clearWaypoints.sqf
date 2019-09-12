@@ -15,9 +15,12 @@ if (_cacheWaypoints) then {
 {deleteWaypoint [_group,0]} forEach (waypoints _group);
 
 // Select an alive unit as leader
+private _units = (units _group) select {alive _x};
+if (_units isEqualTo []) exitWith {};
+
 private _leader = leader _group;
 if (!alive _leader) then {
-	_leader = ((units _group) select {alive _x}) # 0;
+	_leader = _units # 0;
 	_group selectLeader _leader;
 };
 
