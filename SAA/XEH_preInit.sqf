@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------------------------//
 
 ["SAA_setting_flaresEnabled","CHECKBOX",
-	["Give UAV Terminal on drone request","Gives CAS Drone requesters a UAV terminal if they don't have one"],
+	["Enable flares","Enable flares on detection"],
 	"Simplex AI Autonomy",
 	true, // _valueInfo
 	true, // _isGlobal
