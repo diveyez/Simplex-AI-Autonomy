@@ -1,10 +1,13 @@
 name = "Simplex AI Autonomy";
+dir = "@SAA";
 author = "Simplex Team";
 description = "Simplex AI Autonomy";
-overview = "Simplex AI Autonomy is an AI management system for Arma 3";
+overview = "Simplex AI Autonomy is an AI management system for Arma 3.";
 picture = "saa.paa";
 overviewPicture = "saa.paa";
 logo = "saa.paa";
 logoOver = "saa.paa";
 actionName = "Website";
-action = "https://github.com/SceptreOfficial/Simplex-AI-Autonomy";
+action = "https://github.com/SceptreOfficial/Simplex-Support-Services";
+tooltip = "Simplex AI Autonomy";
+tooltipOwned = "Simplex AI Autonomy Owned";
