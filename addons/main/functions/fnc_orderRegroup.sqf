@@ -17,6 +17,7 @@ params ["_respondingGroups","_side","_regroupPos"];
 	if (leader _group distance2D _target >= 400) then {
 		private _vehicles = [];
 		private _infantry = [];
+		
 		{
 			if !(_x in _x) then {
 				private _vehicle = vehicle _x;
@@ -33,6 +34,7 @@ params ["_respondingGroups","_side","_regroupPos"];
 				_infantry pushBack _x
 			};
 		} forEach units _group;
+
 		if !(_vehicles isEqualTo []) then {
 			_completionRadius = COMPLETION_RADIUS_VEHICLE;
 
@@ -48,7 +50,7 @@ params ["_respondingGroups","_side","_regroupPos"];
 
 	// Regroup and attack
 	_group setVariable ["SAA_regroupComplete",false];
-	[_group,_regroupPos,20,"MOVE","AWARE","GREEN","NORMAL","WEDGE",["
+	[_group,_regroupPos,20,"UNLOAD","AWARE","GREEN","NORMAL","WEDGE",["
 		group this getVariable 'SAA_regroupComplete'
 	","
 		{

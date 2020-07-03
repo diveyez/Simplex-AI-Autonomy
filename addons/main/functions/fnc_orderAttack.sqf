@@ -16,6 +16,7 @@ params ["_respondingGroups"];
 	if (leader _group distance2D _target >= 400) then {
 		private _vehicles = [];
 		private _infantry = [];
+
 		{
 			if !(_x in _x) then {
 				private _vehicle = vehicle _x;
@@ -32,6 +33,7 @@ params ["_respondingGroups"];
 				_infantry pushBack _x
 			};
 		} forEach units _group;
+
 		if !(_vehicles isEqualTo []) then {
 			_completionRadius = COMPLETION_RADIUS_VEHICLE;
 
@@ -57,7 +59,7 @@ params ["_respondingGroups"];
 		private _leader = leader _group;
 		private _flankPos = _target getPos [200,(_target getDir _leader) + ([-90,90] select (random 1 < 0.5))];
 
-		[_group,_flankPos,0,"MOVE","AWARE","GREEN","FULL","WEDGE",["true","
+		[_group,_flankPos,0,"UNLOAD","AWARE","GREEN","FULL","WEDGE",["true","
 			{
 				if (!(_x in _x) && {(assignedVehicleRole _x) # 0 == 'cargo'}) then {
 					unassignVehicle _x;
