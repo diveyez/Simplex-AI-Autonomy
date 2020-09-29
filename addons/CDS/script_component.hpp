@@ -1,5 +1,5 @@
-#define COMPONENT CDS
-#include "\z\SAA\addons\main\script_mod.hpp"
+#define COMPONENT cds
+#include "\z\saa\addons\main\script_mod.hpp"
 
 // #define DEBUG_MODE_FULL
 // #define DISABLE_COMPILE_CACHE
@@ -11,7 +11,7 @@
 	#define DEBUG_SETTINGS DEBUG_SETTINGS_CDS
 #endif
 
-#include "\z\SAA\addons\main\script_macros.hpp"
+#include "\z\saa\addons\main\script_macros.hpp"
 #include "\A3\ui_f\hpp\defineCommonGrids.inc"
 #include "\a3\ui_f\hpp\definedikcodes.inc"
 #include "\A3\ui_f_curator\ui\defineResinclDesign.inc"

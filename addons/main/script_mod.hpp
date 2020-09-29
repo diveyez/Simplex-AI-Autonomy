@@ -1,5 +1,5 @@
 #define MAINPREFIX z
-#define PREFIX SAA
+#define PREFIX saa
 
 #include "script_version.hpp"
 

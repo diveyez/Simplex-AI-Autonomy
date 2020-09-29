@@ -1,1 +1,1 @@
-#include "\z\SAA\addons\CDS\script_component.hpp"
+#include "\z\saa\addons\cds\script_component.hpp"
