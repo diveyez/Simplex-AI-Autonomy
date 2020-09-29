@@ -1,5 +1,5 @@
 name = "Simplex AI Autonomy";
-dir = "@SAA";
+dir = "@saa";
 author = "Simplex Team";
 description = "Simplex AI Autonomy";
 overview = "Simplex AI Autonomy is an AI management system for Arma 3.";
