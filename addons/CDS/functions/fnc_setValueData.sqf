@@ -4,8 +4,8 @@ disableSerialization;
 params [["_index",0,[0]],["_valueData",[],[true,"",[]]],["_forceDefault",true,[true]]];
 
 private _ctrl = (uiNamespace getVariable QGVAR(controls)) # _index;
-private _data = _ctrl getVariable QGVAR(data);
-_data params ["_type","_description"];
+private _params = _ctrl getVariable QGVAR(parameters);
+_params params ["_type","_description"];
 
 switch (_type) do {
 	case "CHECKBOX" : {
@@ -15,10 +15,11 @@ switch (_type) do {
 			_bool = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type] joinString "~",_bool];
 		};
 
-		_data set [2,_bool];
-		_ctrl setVariable [QGVAR(data),_data];
+		_params set [2,_bool];
+		_ctrl setVariable [QGVAR(parameters),_params];
 		
 		_ctrl cbSetChecked _bool;
+		_ctrl setVariable [QGVAR(value),_bool];
 	};
 
 	case "EDITBOX" : {
@@ -28,10 +29,11 @@ switch (_type) do {
 			_string = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type] joinString "~",_string];
 		};
 
-		_data set [2,_string];
-		_ctrl setVariable [QGVAR(data),_data];
+		_params set [2,_string];
+		_ctrl setVariable [QGVAR(parameters),_params];
 
 		_ctrl ctrlSetText _string;
+		_ctrl setVariable [QGVAR(value),_string];
 	};
 
 	case "SLIDER" : {
@@ -42,8 +44,8 @@ switch (_type) do {
 			_sliderPos = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type,_sliderData] joinString "~",_sliderPos];
 		};
 
-		_data set [2,[[_min,_max,_decimals],_sliderPos]];
-		_ctrl setVariable [QGVAR(data),_data];
+		_params set [2,[[_min,_max,_decimals],_sliderPos]];
+		_ctrl setVariable [QGVAR(parameters),_params];
 
 		private _sliderPosStr = _sliderPos toFixed _decimals;
 		_ctrl sliderSetRange [_min,_max];
@@ -51,6 +53,8 @@ switch (_type) do {
 
 		private _ctrlEdit = _ctrl getVariable QGVAR(ctrlEdit);
 		_ctrlEdit ctrlSetText _sliderPosStr;
+
+		_ctrl setVariable [QGVAR(value),sliderPosition _ctrl];
 	};
 
 	case "COMBOBOX" : {
@@ -60,8 +64,8 @@ switch (_type) do {
 			_selection = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type,_items] joinString "~",_selection];
 		};
 
-		_data set [2,[_items,_selection]];
-		_ctrl setVariable [QGVAR(data),_data];
+		_params set [2,[_items,_selection]];
+		_ctrl setVariable [QGVAR(parameters),_params];
 
 		lbClear _ctrl;
 
@@ -75,18 +79,18 @@ switch (_type) do {
 		} forEach _items;
 
 		_ctrl lbSetCurSel _selection;
+		_ctrl setVariable [QGVAR(value),_selection];
 	};
 
 	case "LISTNBOX" : {
 		_valueData params [["_rows",[],[[]]],["_selection",0,[0]],["_height",1,[0]]];
-		// To-do: dynamic height adjustment
 
 		if (!_forceDefault) then {
 			_selection = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type,_rows] joinString "~",_selection];
 		};
 
-		_data set [2,[_rows,_selection,_height]];
-		_ctrl setVariable [QGVAR(data),_data];
+		_params set [2,[_rows,_selection,_height]];
+		_ctrl setVariable [QGVAR(parameters),_params];
 
 		lnbClear _ctrl;
 
@@ -105,16 +109,124 @@ switch (_type) do {
 		} forEach _rows;
 
 		_ctrl lnbSetCurSelRow _selection;
+		_ctrl setVariable [QGVAR(value),_selection];
+	};
+
+	case "CARGOBOX" : {
+		_valueData params [["_items",[],[[]]],["_height",4,[0]],["_countLimit",-1,[0]],["_weightLimit",-1,[0]],["_method",0,[0]]];
+
+		//if (!_forceDefault) then {
+		//	GVAR(cache) getVariable [[_title,_description,_type,_items] joinString "~",[]];
+		//};
+
+		_params set [2,[_items,_height,_countLimit,_weightLimit,_method]];
+		_ctrl setVariable [QGVAR(parameters),_params];
+
+		lbClear _ctrl;
+		
+		if (_method isEqualTo 0) then {
+			lbClear (_ctrl getVariable QGVAR(ctrlCargo));
+		};
+
+		{
+			_x params [["_item","",["",[]]],["_data","",[""]],["_weight",0,[0]]];
+			_item params [["_text","",[""]],["_tooltip","",[""]],["_icon","",[""]],["_RGBA",[1,1,1,1],[[]],4]];
+
+			private _index = _ctrl lbAdd _text;
+			_ctrl lbSetTooltip [_index,_tooltip];
+			_ctrl lbSetPicture [_index,_icon];
+			_ctrl lbSetColor [_index,_RGBA];
+			_ctrl lbSetData [_index,_data];
+			_ctrl lbSetValue [_index,_weight];
+		} forEach _items;
+
+		_ctrl lbSetCurSel 0;
+
+		if (_method isEqualTo 0) then {
+			_ctrl setVariable [QGVAR(value),[]];
+		};
+	};
+
+	case "CARGOBOX2" : {
+		_valueData params [["_tree",[],[[]]],["_height",4,[0]],["_countLimit",-1,[0]],["_weightLimit",-1,[0]],["_method",0,[0]],["_minInputLevel",0,[0]]];
+
+		//if (!_forceDefault) then {
+		//	GVAR(cache) getVariable [[_title,_description,_type,_items] joinString "~",[]];
+		//};
+
+		_params set [2,[_items,_height,_countLimit,_weightLimit,_method,_minInputLevel]];
+		_ctrl setVariable [QGVAR(parameters),_params];
+
+		tvClear _ctrl;
+		
+		if (_method isEqualTo 0) then {
+			lbClear (_ctrl getVariable QGVAR(ctrlCargo));
+		};
+
+		private _fnc_recursive = {
+			params ["_parentPath","_entry"];
+			_entry params [["_item","",["",[]]],["_data","",[""]],["_weight",0,[0]],["_children",[],[[]]]];
+			_item params [["_text","",[""]],["_tooltip","",[""]],["_icon","",[""]],["_RGBA",[1,1,1,1],[[]],4]];
+
+			private _path = _parentPath + [_ctrl tvAdd [_parentPath,_text]];
+			_ctrl tvSetData [_path,_data];
+			_ctrl tvSetValue [_path,_weight];
+			_ctrl tvSetPicture [_path,_icon];
+			_ctrl tvSetTooltip [_path,_tooltip];
+			_ctrl tvSetPictureColor [_path,_RGBA];
+
+			{[_path,_x] call _fnc_recursive} forEach _children;
+		};
+
+		{[[],_x] call _fnc_recursive} forEach _tree;
+
+		if (_method isEqualTo 0) then {
+			_ctrl setVariable [QGVAR(value),[]];
+		};
+	};
+
+	case "TREE" : {
+		_valueData params [["_tree",[],[[]]],["_height",4,[0]],["_returnPath",false,[false]]];
+
+		//if (!_forceDefault) then {
+		//	GVAR(cache) getVariable [[_title,_description,_type,_items] joinString "~",[]];
+		//};
+
+		_params set [2,[_tree,_height,_returnPath]];
+		_ctrl setVariable [QGVAR(parameters),_params];
+
+		tvClear _ctrl;
+
+		private _fnc_recursive = {
+			params ["_parentPath","_entry"];
+			_entry params [["_item","",["",[]]],["_data","",[""]],["_children",[],[[]]]];
+			_item params [["_text","",[""]],["_tooltip","",[""]],["_icon","",[""]],["_RGBA",[1,1,1,1],[[]],4]];
+
+			private _path = _parentPath + [_ctrl tvAdd [_parentPath,_text]];
+			_ctrl tvSetData [_path,_data];
+			_ctrl tvSetPicture [_path,_icon];
+			_ctrl tvSetTooltip [_path,_tooltip];
+			_ctrl tvSetPictureColor [_path,_RGBA];
+
+			{[_path,_x] call _fnc_recursive} forEach _children;
+		};
+
+		{[[],_x] call _fnc_recursive} forEach _tree;
+
+		_ctrl tvSetCurSel [0];
+
+		_ctrl setVariable [QGVAR(value),[_ctrl tvData tvCurSel _ctrl,tvCurSel _ctrl] select _returnPath];
 	};
 
 	case "BUTTON" : {
 		_valueData params [["_code",{},[{},""]]];
 
-		if (!_forceDefault) then {
-			_code = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type] joinString "~",_code];
-		};
+		//if (!_forceDefault) then {
+		//	_code = GVAR(cache) getVariable [[uiNamespace getVariable QGVAR(title),_description,_type] joinString "~",_code];
+		//};
 
-		_data set [2,_code];
-		_ctrl setVariable [QGVAR(data),_data];
+		_params set [2,_code];
+		_ctrl setVariable [QGVAR(parameters),_params];
+		_ctrl setVariable [QGVAR(value),_code];
 	};
 };
