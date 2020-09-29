@@ -60,4 +60,25 @@ class CfgVehicles {
 		scopeCurator = 2;
 		SAA_assignment = "SENTRY";
 	};
+
+	class SAA_Module_Occupy : SAA_Module_Base {
+		displayName = "Occupy";
+		icon = ICON_OCCUPY;
+		function = QFUNC(moduleOccupy);
+		scopeCurator = 2;
+	};
+	
+	class SAA_Module_OccupyManage : SAA_Module_Base {
+		displayName = "Occupy/Manage";
+		icon = ICON_OCCUPYMANAGE;
+		function = QFUNC(moduleOccupyManage);
+		scopeCurator = 2;
+	};
+
+	class SAA_Module_Unassign : SAA_Module_Base {
+		displayName = "Unassign";
+		icon = ICON_UNASSIGN;
+		function = QFUNC(moduleUnassign);
+		scopeCurator = 2;
+	};
 };

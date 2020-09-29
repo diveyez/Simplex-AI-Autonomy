@@ -36,6 +36,9 @@
 #define ICON_PATROL "z\SAA\addons\main\data\patrol.paa"
 #define ICON_QRF "z\SAA\addons\main\data\qrf.paa"
 #define ICON_SENTRY "z\SAA\addons\main\data\sentry.paa"
+#define ICON_OCCUPY "\A3\Ui_f\data\IGUI\Cfg\simpleTasks\types\meet_ca.paa"
+#define ICON_OCCUPYMANAGE "\A3\Ui_f\data\IGUI\Cfg\simpleTasks\types\use_ca.paa"
+#define ICON_UNASSIGN "\A3\Ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa"
 
 #define SMOKE_TYPES [ \
 	["SmokeShell","SmokeShellMuzzle"], \

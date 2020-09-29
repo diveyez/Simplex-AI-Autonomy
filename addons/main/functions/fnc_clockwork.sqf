@@ -13,7 +13,7 @@ if (_list isEqualTo [] || {_index >= count _list}) exitWith {
 SAA_loopIndex = _index + 1;
 private _item = _list # _index;
 
-if (_item isEqualType grpNull && {!isNull _item}) then {
+if (_item isEqualType grpNull && {!isNull _item && !isNil {_item getVariable "SAA_assignment"}}) then {
 	_item call FUNC(scan);
 };
 

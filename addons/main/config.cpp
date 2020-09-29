@@ -11,7 +11,10 @@ class CfgPatches {
 			"SAA_Module_AssignGarrison",
 			"SAA_Module_AssignPatrol",
 			"SAA_Module_AssignQRF",
-			"SAA_Module_AssignSentry"
+			"SAA_Module_AssignSentry",
+			"SAA_Module_Occupy",
+			"SAA_Module_OccupyManage",
+			"SAA_Module_Unassign"
 		};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;

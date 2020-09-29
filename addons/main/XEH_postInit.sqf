@@ -24,7 +24,7 @@ if (isServer) then {
 		params ["_side","_targets"];
 		private _sideTargets = missionNamespace getVariable [format ["SAA_targets_%1",_side],[]];
 		missionNamespace setVariable [format ["SAA_targets_%1",_side],_sideTargets - _targets,true];
-	}];
+	}] call CBA_fnc_addEventHandler;
 
 	["SAA_engagementStarted",{
 		params ["_side","_respondingGroups","_newTargets"];
@@ -52,6 +52,10 @@ if (isServer) then {
 	};
 };
 
+if (!isServer && !hasInterface) then {
+	["SAA_headlessClientJoined",[player]] call CBA_fnc_serverEvent;
+};
+
 ["SAA_checkForUnknownTargets",{
 	params ["_group","_targets"];
 	_group setVariable ["SAA_unknownTargets",_targets select {_group knowsAbout _x < 0.5},true];
@@ -59,6 +63,26 @@ if (isServer) then {
 
 ["SAA_returnToOrigin",FUNC(returnToOrigin)] call CBA_fnc_addEventHandler;
 
-if (!isServer && !hasInterface) then {
-	["SAA_headlessClientJoined",[player]] call CBA_fnc_serverEvent;
-};
+[QGVAR(occupationETA),{
+	params ["_queueCount"];
+
+	if (!isNil QGVAR(ETAPFHID)) then {
+		[GVAR(ETAPFHID)] call CBA_fnc_removePerFrameHandler;
+	};
+
+	GVAR(ETAPFHID) = [{
+		params ["_queueCount","_PFHID"];
+
+		private _ETA = ceil (_queueCount * 0.3);
+
+		if (_ETA > 0) then {
+			hint ("Occupation completion ETA: " + str _ETA);
+		} else {
+			[_PFHID] call CBA_fnc_removePerFrameHandler;
+			GVAR(ETAPFHID) = nil;
+			hint "";
+		};
+
+		_this set [0,_queueCount - 1];
+	},0.3,_queueCount] call CBA_fnc_addPerFrameHandler;
+}] call CBA_fnc_addEventHandler;

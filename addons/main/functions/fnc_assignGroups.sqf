@@ -13,6 +13,7 @@ if (isNil "SAA_EFID") then {
 	_x setVariable ["lambs_danger_disableGroupAI",true,true];
 	{_x setVariable ["lambs_danger_disableAI",true,true]} forEach units _x;
 	_x setVariable ["Vcm_Disable",true,true];
+	_x setVariable ["acex_headless_blacklist",true,true];
 
 	// SAA stuff
 	_x allowFleeing 0;

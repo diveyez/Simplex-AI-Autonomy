@@ -2,11 +2,15 @@
 
 params ["_group"];
 
+private _assignment = _group getVariable "SAA_assignment";
+
+if (isNil "_assignment") exitWith {};
+
 (_group getVariable "SAA_origin") params ["_originPos","_originDir"];
 
 _group call FUNC(clearWaypoints);
 
-switch (_group getVariable "SAA_assignment") do {
+switch (_assignment) do {
 	case "FREE" : {
 		{([_group] + _x) call FUNC(addWaypoint)} forEach (_group getVariable "SAA_waypointsCache");
 	};

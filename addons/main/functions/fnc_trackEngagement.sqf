@@ -2,7 +2,7 @@
 
 params ["_side","_respondingGroups","_targets"];
 
-_respondingGroups = _respondingGroups select {({alive _x} count units _x) != 0 && !(_x getVariable "SAA_available")};
+_respondingGroups = _respondingGroups select {({alive _x} count units _x) != 0 && !(_x getVariable ["SAA_available",false])};
 
 if (_respondingGroups isEqualTo []) exitWith {
 	["SAA_cleanupTargets",[_side,_targets]] call CBA_fnc_serverEvent;
@@ -12,13 +12,13 @@ if (_respondingGroups isEqualTo []) exitWith {
 [{
 	(_this getVariable "params") params ["_side","_respondingGroups","_targets"];
 
-	_respondingGroups = _respondingGroups select {({alive _x} count units _x) != 0 && !(_x getVariable "SAA_available")};
+	_respondingGroups = _respondingGroups select {({alive _x} count units _x) != 0 && !(_x getVariable ["SAA_available",false])};
 
 	// Stop if no more responding groups
 	if (_respondingGroups isEqualTo []) exitWith {
 		["SAA_cleanupTargets",[_side,_targets]] call CBA_fnc_serverEvent;
 		_this setVariable ["exit_condition",{true}];
-		SAA_DEBUG_1("Engagement - No groups to respond to targets: %1",_targets)
+		SAA_DEBUG_1("Engagement - No groups to respond to targets: %1",_targets);
 	};
 
 	// Forget about dead or empty targets
@@ -26,14 +26,14 @@ if (_respondingGroups isEqualTo []) exitWith {
 	if !(_deadTargets isEqualTo []) then {
 		["SAA_cleanupTargets",[_side,_deadTargets]] call CBA_fnc_serverEvent;
 		_targets = _targets - _deadTargets;
-		SAA_DEBUG_1("Engagement - Dead or empty targets: %1",_deadTargets)
+		SAA_DEBUG_1("Engagement - Dead or empty targets: %1",_deadTargets);
 	};
 
 	// Stop if no more targets
 	if (_targets isEqualTo []) exitWith {
 		{_x setVariable ["SAA_available",true,true]} forEach _respondingGroups;
 		_this setVariable ["exit_condition",{true}];
-		SAA_DEBUG("Engagement - No more targets")
+		SAA_DEBUG("Engagement - No more targets");
 	};
 
 	// Handle unknown targets
@@ -48,17 +48,23 @@ if (_respondingGroups isEqualTo []) exitWith {
 		private _unknownTargets = _previousUnknownTargets arrayIntersect _latestUnknownTargets;
 		_targets = _targets - _unknownTargets;
 		["SAA_cleanupTargets",[_side,_unknownTargets]] call CBA_fnc_serverEvent;
-		SAA_DEBUG_1("Engagement - Targets considered unknown: %1",_unknownTargets)
+		SAA_DEBUG_1("Engagement - Targets considered unknown: %1",_unknownTargets);
 	};
 
 	// Stop if no more targets
 	if (_targets isEqualTo []) exitWith {
 		{_x setVariable ["SAA_available",true,true]} forEach _respondingGroups;
 		_this setVariable ["exit_condition",{true}];
-		SAA_DEBUG("Engagement - No more targets")
+		SAA_DEBUG("Engagement - No more targets");
 	};
 
 	private _knownTargets = _targets - _latestUnknownTargets;
+
+	// Evaluate manpower
+	// TODO: Like 'analyzeAndCollect' except use only 'responding groups' vs 'known targets'
+	// If engagement is fucked, end it so targets can be revaluated normally
+
+	SAA_DEBUG_2("Engagement - Continues: %1 -VS- %2",_respondingGroups,_knownTargets);
 
 	{
 		private _target = _x getVariable "SAA_target";
@@ -101,4 +107,4 @@ if (_respondingGroups isEqualTo []) exitWith {
 	} forEach _respondingGroups;
 
 	_this setVariable ["params",[_side,_respondingGroups,_targets]];
-},90,[_side,_respondingGroups,_targets]] call CBA_fnc_createPerFrameHandlerObject;
+},60,[_side,_respondingGroups,_targets]] call CBA_fnc_createPerFrameHandlerObject;
