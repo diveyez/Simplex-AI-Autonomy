@@ -99,7 +99,7 @@
 		colorFocused[] = {0.2,0.2,0.2,1}; \
 		colorShadow[] = {0,0,0,0}; \
 		colorText[] = {1,1,1,1}; \
-		text = "CANCEL"; \
+		text = "$STR_CDS_CANCEL"; \
 		font = "PuristaMedium"; \
 		sizeEx = GRID_H(1); \
 		style = 2; \
@@ -130,7 +130,7 @@
 		colorFocused[] = {0.2,0.2,0.2,1}; \
 		colorShadow[] = {0,0,0,0}; \
 		colorText[] = {1,1,1,1}; \
-		text = "CONFIRM"; \
+		text = "$STR_CDS_CONFIRM"; \
 		font = "PuristaMedium"; \
 		sizeEx = GRID_H(1); \
 		style = 2; \

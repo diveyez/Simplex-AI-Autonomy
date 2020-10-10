@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="CDS">
+	<Key ID="STR_CDS_CONFIRM">
+		<English>CONFIRM</English>
+		<French>VALIDER</French>
+	</Key>
+	<Key ID="STR_CDS_CANCEL">
+		<English>CANCEL</English>
+		<French>ANNULER</French>
+	</Key>
+</Project>
