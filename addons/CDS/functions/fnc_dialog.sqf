@@ -204,45 +204,40 @@ GVAR(keyDownEHID) = [_display,"KeyDown",{
 	};
 
 	if (!isNull findDisplay IDD_RSCDISPLAYCURATOR && visibleMap) exitWith {
+		private _ctrl = uiNamespace getVariable [QGVAR(editFocus),controlNull];
+		
+		if (isNull _ctrl) exitWith {true};
+
+		if (_key == DIK_HOME) then {
+			_ctrl ctrlSetTextSelection [0,0];
+		};
+
+		if (_key == DIK_END) then {
+			_ctrl ctrlSetTextSelection [count ctrlText _ctrl,0];
+		};
+
 		if (_key in [DIK_BACKSPACE,DIK_DELETE]) then {
-			private _ctrl = uiNamespace getVariable [QGVAR(editFocus),controlNull];
+			private _text = toArray ctrlText _ctrl;
+
+			ctrlTextSelection _ctrl params ["_start","_length","_selectedText"];
+
+			if (_length != 0) exitWith {
+				_start = [_start,_start + _length] select (_length < 0);
+				_text deleteRange [_start,abs _length];
+				_ctrl ctrlSetText toString _text;
+				_ctrl ctrlSetTextSelection [_start,0];
+			};
 			
-			if (isNull _ctrl) exitWith {};
-
-			private _text = ctrlText _ctrl;
-
 			if (_key == DIK_BACKSPACE) then {
-				_text = _text select [0,count _text - 1];
+				_text deleteAt (_start - 1);
+				_ctrl ctrlSetText toString _text;
+				_ctrl ctrlSetTextSelection [_start - 1,0];
 			};
-
+			
 			if (_key == DIK_DELETE) then {
-				_text = _text select [1,count _text - 1];
+				_text deleteAt _start;
+				_ctrl ctrlSetText toString _text;
 			};
-
-			// Whenever the dev command comes out use this code
-			//ctrlTextSelection _ctrl params ["_start","_length","_selectedText"];
-			//
-			//if (_length != 0) exitWith {
-			//	_text = toArray _text;
-			//	_text deleteRange [_start,_length];
-			//	_text = toString _text;
-			//
-			//	_ctrl ctrlSetText _text;
-			//};
-			//
-			//if (_key == DIK_BACKSPACE) then {
-			//	_text = toArray _text;
-			//	_text deleteAt _start;
-			//	_text = toString _text;
-			//};
-			//
-			//if (_key == DIK_DELETE) then {
-			//	_text = toArray _text;
-			//	_text deleteAt (_start + 1);
-			//	_text = toString _text;
-			//};
-
-			_ctrl ctrlSetText _text;
 		};
 
 		true
