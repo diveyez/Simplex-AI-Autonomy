@@ -76,13 +76,13 @@ if (!isServer && !hasInterface) then {
 		private _ETA = ceil (_queueCount * 0.3);
 
 		if (_ETA > 0) then {
-			hint ("Occupation completion ETA: " + str _ETA);
+			hintSilent ("Occupation completion ETA: " + str _ETA);
 		} else {
 			[_PFHID] call CBA_fnc_removePerFrameHandler;
 			GVAR(ETAPFHID) = nil;
-			hint "";
+			hintSilent "";
 		};
 
-		_this set [0,_queueCount - 1];
+		_x set [4,_queueCount - 1];
 	},0.3,_queueCount] call CBA_fnc_addPerFrameHandler;
 }] call CBA_fnc_addEventHandler;
