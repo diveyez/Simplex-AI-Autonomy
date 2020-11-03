@@ -12,9 +12,9 @@
 #endif
 
 #include "\z\saa\addons\main\script_macros.hpp"
-#include "\A3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\definecommongrids.inc"
 #include "\a3\ui_f\hpp\definedikcodes.inc"
-#include "\A3\ui_f_curator\ui\defineResinclDesign.inc"
+#include "\a3\ui_f_curator\ui\defineresincldesign.inc"
 
 #define GRID_W(N) (N * GUI_GRID_W)
 #define GRID_H(N) (N * GUI_GRID_H)
