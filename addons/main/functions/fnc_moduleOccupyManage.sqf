@@ -1,5 +1,9 @@
 #include "script_component.hpp"
 
+params ["_logic","_synced"];
+
+if (!local _logic) exitWith {};
+	
 [{
 	params ["_logic","_synced"];
 	
