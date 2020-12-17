@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="SAA">
+	<Package name="Main">
+		<Key ID="STR_SAA_Main_SimplexAIAutonomy">
+			<English>Simplex AI Autonomy</English>
+		</Key>
+		<!--
+		<Key ID="STR_SAA_Main_SettingCategory_">
+			<English></English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_">
+			<English></English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_">
+			<English></English>
+		</Key>
+		-->
+		<Key ID="STR_SAA_Main_SettingCategory_Core">
+			<English>Core</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingCategory_Development">
+			<English>Development</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingCategory_Caching">
+			<English>Caching</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingCategory_AISubSkills">
+			<English>AI Sub-skills</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_applySubSkills">
+			<English>Automatically apply skills</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_applySubSkills">
+			<English>Applies on spawn and locality transfer. Set "SAA_setSkills" variable false on unit to disable.</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillGeneral">
+			<English>Skill: General</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillGeneral">
+			<English>Affects the AI decision making\nRaw "Skill", value is distributed to sub-skills unless defined otherwise</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillCommanding">
+			<English>Skill: Commanding</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillCommanding">
+			<English>Higher values make AI report targets faster</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillCourage">
+			<English>Skill: Courage</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillCourage">
+			<English>Higher values make AI have more courage/morale</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillAimingAccuracy">
+			<English>Skill: Aiming Accuracy</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillAimingAccuracy">
+			<English>Higher values make AI lead targets better\nHigher values make AI estimate range and calculate bullet drop more precicely\nHigher values make AI compensate weapon dispersion better\nHigher values make AI control recoil better\nHigher values can make AI open fire with less target knowledge</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillAimingShake">
+			<English>Skill: Aiming Shake</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillAimingShake">
+			<English>Higher values make AI hold weapons more steady for better precision</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillAimingSpeed">
+			<English>Skill: Aiming Speed</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillAimingSpeed">
+			<English>Higher values make AI rotate and stabilize aim faster</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillReloadSpeed">
+			<English>Skill: Reload Speed</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillReloadSpeed">
+			<English>Higher values make AI switch or reload weapons faster</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillSpotDistance">
+			<English>Skill: Spot Distance</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillSpotDistance">
+			<English>Higher values make AI better at spotting targets\nHigher values make AI collect information about targets more precisely</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDisplayName_skillSpotTime">
+			<English>Skill: Spot Time</English>
+		</Key>
+		<Key ID="STR_SAA_Main_SettingDescription_skillSpotTime">
+			<English>Higher values make AI react faster to death, damage, or enemies</English>
+		</Key>
+	</Package>
+</Project>

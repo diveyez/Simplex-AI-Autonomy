@@ -1,134 +1,7 @@
 #include "script_component.hpp"
 ADDON = false;
 #include "XEH_PREP.hpp"
-
-//-----------------------------------------------------------------------------------------------//
-
-["SAA_setting_flaresEnabled","CHECKBOX",
-	["Enable flares","Enable flares on detection"],
-	["Simplex AI Autonomy","Main"],
-	true, // _valueInfo
-	true, // _isGlobal
-	{},
-	false // _needRestart
-] call CBA_fnc_addSetting;
-
-["SAA_setting_smokeEnabled","CHECKBOX",
-	["Enable smoke","Enable smoke grenades on detection"],
-	["Simplex AI Autonomy","Main"],
-	true,
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-["SAA_setting_smokeColorWEST","LIST",
-	["Side smoke color - WEST","Default smoke color used for side"],
-	["Simplex AI Autonomy","Main"],
-	[[0,1,2,3,4],["White","Blue","Green","Yellow","Red"],0],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-["SAA_setting_smokeColorEAST","LIST",
-	["Side smoke color - EAST","Default smoke color used for side"],
-	["Simplex AI Autonomy","Main"],
-	[[0,1,2,3,4],["White","Blue","Green","Yellow","Red"],0],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-["SAA_setting_smokeColorGUER","LIST",
-	["Side smoke color - GUER","Default smoke color used for side"],
-	["Simplex AI Autonomy","Main"],
-	[[0,1,2,3,4],["White","Blue","Green","Yellow","Red"],0],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-["SAA_setting_enableDebug","CHECKBOX",
-	"Enable debug",
-	["Simplex AI Autonomy","Development"],
-	false,
-	false,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-["SAA_setting_cachingEnabled","CHECKBOX",
-	"Enable simple caching",
-	["Simplex AI Autonomy","Caching"],
-	true,
-	true,
-	{},
-	true
-] call CBA_fnc_addSetting;
-
-["SAA_setting_cachingDistance","EDITBOX",
-	"Caching distance from player",
-	["Simplex AI Autonomy","Caching"],
-	"1800",
-	true,
-	{missionNamespace setVariable ["SAA_cachingDistance",parseNumber _this,true]},
-	false
-] call CBA_fnc_addSetting;
-
-[QGVAR(skillsApply),"CHECKBOX",
-	["Automatically apply skills","Applies on spawn and locality transfer. Set ""SAA_setSkills"" variable false on unit to disable."],
-	["Simplex AI Autonomy","AI Sub-skills"],
-	true,
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-[QGVAR(skillsFullCourage),"CHECKBOX",
-	["Full courage","True to always have full courage, false to follow ""general"" skill"],
-	["Simplex AI Autonomy","AI Sub-skills"],
-	true,
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-[QGVAR(skillsGeneral),"SLIDER",
-	["Skills: General","Applies to: General, commanding, courage"],
-	["Simplex AI Autonomy","AI Sub-skills"],
-	[0,1,0.5,2],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-[QGVAR(skillsAccuracy),"SLIDER",
-	["Skills: Accuracy","Applies to: Aiming accuracy"],
-	["Simplex AI Autonomy","AI Sub-skills"],
-	[0,1,0.5,2],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-[QGVAR(skillsHandling),"SLIDER",
-	["Skills: Handling","Applies to: Aiming shake, aiming speed, reload speed"],
-	["Simplex AI Autonomy","AI Sub-skills"],
-	[0,1,0.5,2],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
-
-[QGVAR(skillsSpotting),"SLIDER",
-	["Skills: Spotting","Applies to: Spot distance, spot time"],
-	["Simplex AI Autonomy","AI Sub-skills"],
-	[0,1,0.5,2],
-	true,
-	{},
-	false
-] call CBA_fnc_addSetting;
+#include "cba_settings.sqf"
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -219,15 +92,15 @@ GVAR(presets) = profileNamespace getVariable [QGVAR(presets),[[
 
 ["CAManBase","initPost",{
 	params ["_unit"];
-	if (GVAR(skillsApply) && local _unit) then {
-		_unit call FUNC(applySkills);
+	if (GVAR(applySubSkills) && local _unit) then {
+		_unit call FUNC(applySubSkills);
 	};
 }] call CBA_fnc_addClassEventHandler;
 
 ["CAManBase","Local",{
 	params ["_unit","_local"];
-	if (GVAR(skillsApply) && _local) then {
-		_unit call FUNC(applySkills);
+	if (GVAR(applySubSkills) && _local) then {
+		_unit call FUNC(applySubSkills);
 	};
 }] call CBA_fnc_addClassEventHandler;
 

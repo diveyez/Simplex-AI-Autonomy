@@ -1,7 +1,7 @@
 PREP(addToQueue);
 PREP(addWaypoint);
 PREP(analyzeAndCollect);
-PREP(applySkills);
+PREP(applySubSkills);
 PREP(assignGroups);
 PREP(assignmentDialog);
 PREP(assignmentDialogConfirm);
