@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="SAA">
+	<Package name="Civilians">
+		<!--
+		<Key ID="STR_SAA_Civilians_SettingCategory_">
+			<English></English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingDisplayName_">
+			<English></English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingDescription_">
+			<English></English>
+		</Key>
+		-->
+	</Package>
+</Project>
