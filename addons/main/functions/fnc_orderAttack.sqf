@@ -57,7 +57,7 @@ params ["_respondingGroups"];
 		_group call FUNC(theNudge);
 	} else {
 		private _leader = leader _group;
-		private _flankPos = _target getPos [200,(_target getDir _leader) + ([-90,90] select (random 1 < 0.5))];
+		private _flankPos = _target getPos [200,(_target getDir _leader) + selectRandom [-90,90]];
 
 		[_group,_flankPos,0,"UNLOAD","AWARE","GREEN","FULL","WEDGE",["true","
 			{
