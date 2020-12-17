@@ -16,6 +16,7 @@ PREP(iterate);
 PREP(moduleAssign);
 PREP(moduleOccupy);
 PREP(moduleOccupyManage);
+PREP(moduleToggleCaching);
 PREP(moduleUnassign);
 PREP(mountQRF);
 PREP(occupy);

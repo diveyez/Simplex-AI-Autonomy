@@ -75,6 +75,13 @@ class CfgVehicles {
 		scopeCurator = 2;
 	};
 
+	class SAA_Module_ToggleCaching : SAA_Module_Base {
+		displayName = "Toggle Caching";
+		icon = ICON_TOGGLECACHING;
+		function = QFUNC(moduleToggleCaching);
+		scopeCurator = 2;
+	};
+
 	class SAA_Module_Unassign : SAA_Module_Base {
 		displayName = "Unassign";
 		icon = ICON_UNASSIGN;

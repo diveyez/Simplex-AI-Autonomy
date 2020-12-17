@@ -36,6 +36,10 @@ if (isNil "SAA_EFID") then {
 	_x setVariable ["SAA_targetsToReport",[],true];
 	_x setVariable ["SAA_target",objNull,true];
 
+	if (!SAA_setting_cachingDefault) then {
+		_x setVariable ["SAA_allowCaching",false,true];
+	};
+
 	switch (_assignment) do {
 		case "FREE" : {
 			_x setVariable ["SAA_available",true,true];
