@@ -31,20 +31,22 @@ private _queueCount = 0;
 
 	private _assignmentType = _forEachIndex;
 
-	{_x call {
-		params [["_config",0,[configNull,[],0]],["_range",[],[[]]]];
+	{
+		_x params [["_config",0,[configNull,[],0]],["_range",[],[[]]]];
 		_range params [["_min",0,[0]],["_max",0,[0]]];
 
-		if (_max <= 0 || _config isEqualType 0 && {_config <= 0}) exitWith {};
+		if (_max > 0) then {
+			if (_config isEqualType 0 && {_config <= 0}) exitWith {};
+				
+			_min = round linearConversion [0,1,_coefficient,0,_min,true];
+			_max = round linearConversion [0,1,_coefficient,0,_max,true];
 
-		_min = round linearConversion [0,1,_coefficient,0,_min,true];
-		_max = round linearConversion [0,1,_coefficient,0,_max,true];
-
-		for "_i" from 1 to (_min + round random (_max - _min)) do {
-			[_assignmentType,[_area,_side,_config,_settings]] call FUNC(addToQueue);
-			_queueCount = _queueCount + 1;
+			for "_i" from 1 to (_min + round random (_max - _min)) do {
+				[_assignmentType,[_area,_side,_config,_settings]] call FUNC(addToQueue);
+				_queueCount = _queueCount + 1;
+			};
 		};
-	}} forEach _density;
+	} forEach _density;
 } forEach [[_patrolDensity,_patrolCoef],[_garrisonDensity,_garrisonCoef],[_sentryDensity,_sentryCoef],[_QRFDensity,_QRFCoef]];
 
 // Start ETA tracker for zeus that submitted occupation

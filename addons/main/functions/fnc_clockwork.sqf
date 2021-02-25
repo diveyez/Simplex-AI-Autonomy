@@ -3,7 +3,7 @@
 private _list = SAA_loopList;
 private _index = SAA_loopIndex;
 
-if (_list isEqualTo [] || {_index >= count _list}) exitWith {
+if (_list isEqualTo [] || _index >= count _list) exitWith {
 	_list = allGroups select {local _x && {!isNil {_x getVariable "SAA_assignment"}}};
 	_list append SAA_cachedGroups;
 	SAA_loopList = _list;
