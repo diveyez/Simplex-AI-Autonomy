@@ -5,7 +5,7 @@ params [["_targetPosition",[],[[]]],["_spawnRadius",-1,[0]],["_type",-1,[0]]];
 if (surfaceIsWater _targetPosition || _spawnRadius < 0 || _type < 0) exitWith {};
 
 private _spawnCounts = switch (_type) do {
-	case 0 : {[GVAR(pedCount),0,0]};
+	case 0 : {[GVAR(pedestrianCount),0,0]};
 	case 1 : {[0,GVAR(driverCount),0]};
 	case 2 : {[0,0,GVAR(parkedCount)]};
 };
@@ -14,7 +14,7 @@ if (_spawnCounts isEqualTo [0,0,0]) exitWith {};
 
 if ((GVAR(blacklist) findIf {
 	private _area = +([_x] call CBA_fnc_getArea);
-	if !(_area isEqualTo []) then {
+	if (_area isNotEqualTo []) then {
 		_area set [1,_area # 1 + 100];
 		_area set [2,_area # 2 + 100];
 		_targetPosition inArea _area
@@ -33,7 +33,13 @@ _spawnPoint setVariable [QGVAR(type),_type];
 	(GVAR(spawnPoints) select {_x getVariable QGVAR(type) isEqualTo _type}) + GVAR(blacklist),
 	{
 		params ["_object","_spawnPoint"];
-		_spawnPoint setVariable [QGVAR(objects),(_spawnPoint getVariable [QGVAR(objects),[]]) + [_object]];
+
+		if (isNull _spawnPoint) then {
+			{_object deleteVehicleCrew _x} forEach crew _object;
+			deleteVehicle _object;
+		} else {
+			_spawnPoint setVariable [QGVAR(objects),(_spawnPoint getVariable [QGVAR(objects),[]]) + [_object]];
+		};
 	},
 	_spawnPoint,
 	true

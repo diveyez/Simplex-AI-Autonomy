@@ -1,16 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="SAA">
 	<Package name="Civilians">
-		<!--
-		<Key ID="STR_SAA_Civilians_SettingCategory_">
-			<English></English>
+		<Key ID="STR_SAA_Civilians_SettingParent">
+			<English>SAA Civilians</English>
 		</Key>
-		<Key ID="STR_SAA_Civilians_SettingDisplayName_">
-			<English></English>
+
+		<!-- Setting Categories -->
+		
+		<Key ID="STR_SAA_Civilians_SettingCategory_AmbientAircraft">
+			<English>Ambient Aircraft</English>
 		</Key>
-		<Key ID="STR_SAA_Civilians_SettingDescription_">
-			<English></English>
+		<Key ID="STR_SAA_Civilians_SettingCategory_AmbientCivilians">
+			<English>Ambient Civilians</English>
 		</Key>
-		-->
+		<Key ID="STR_SAA_Civilians_SettingCategory_CiviliansExperimental">
+			<English>Civilians: Experimental</English>
+		</Key>
+		
+		<!-- Settings -->
+
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftEnabled">
+			<English>Enable ambient aircraft</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftEnabled">
+			<English>Random aircraft flyovers</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftChance">
+			<English>Chance</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftChance">
+			<English>Chance of aircraft spawning after random time has elapsed</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftMinTime">
+			<English>Min time</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftMinTime">
+			<English>Minimum time between spawn chances</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftMaxTime">
+			<English>Max time</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftMaxTime">
+			<English>Maximum time between spawn chances</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftAltitude">
+			<English>Altitude</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftAltitude">
+			<English>Aircraft flying height</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftSpawnDistance">
+			<English>Spawn distance</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftSpawnDistance">
+			<English>How far away should aircraft spawn/de-spawn from selected player</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftTTL">
+			<English>Time to live</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftTTL">
+			<English>Aircraft will be deleted after set time (0 to disable)</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_aircraftClassesStr">
+			<English>Aircraft classes (weighted)</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftClassesStr">
+			<English>Array of aircraft classes and weight/chance they will spawn (weighted array)</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_autoStart">
+			<English>Auto-start (server)</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_autoStart">
+			<English>Starts the ambient civilian system on the server when the mission loads</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_pedSpawnRadius">
+			<English>Pedestrian spawn radius</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_pedSpawnRadius">
+			<English>Radius of sector around players to spawn pedestrians</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_driverSpawnRadius">
+			<English>Driving vehicle spawn radius</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_driverSpawnRadius">
+			<English>Radius of sector around players to spawn driving vehicles</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_parkedSpawnRadius">
+			<English>Parked vehicle spawn radius</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_parkedSpawnRadius">
+			<English>Radius of sector around players to spawn unnoccupied vehicles</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_pedestrianCount">
+			<English>Pedestrians</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_pedestrianCount">
+			<English>Amount of pedestrians to spawn in every sector</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_driverCount">
+			<English>Driving vehicles</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_driverCount">
+			<English>Amount of driven/moving vehicles to spawn in every sector</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_parkedCount">
+			<English>Parked vehicles</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_parkedCount">
+			<English>Amount of unnoccupied vehicles to spawn in every sector</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_unitClassesStr">
+			<English>Unit classes</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_unitClassesStr">
+			<English>Civilian unit classes. Leave empty for defaults</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_vehClassesStr">
+			<English>Vehicle classes</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_vehClassesStr">
+			<English>Vehicle classes. Leave empty for defaults</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_pedSpawnDelay">
+			<English>Pedestrian spawn delay</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_pedSpawnDelay">
+			<English>Delay between each pedestrian being spawned</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_driverSpawnDelay">
+			<English>Driver spawn delay</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_driverSpawnDelay">
+			<English>Delay between each driving vehicle being spawned</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_parkedSpawnDelay">
+			<English>Parked spawn delay</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_parkedSpawnDelay">
+			<English>Delay between each parked vehicle being spawned</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingName_minPanicTime">
+			<English>Minimum panic time</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_SettingInfo_minPanicTime">
+			<English>Minimum time in seconds civilians will stay in a panicked state</English>
+		</Key>
+
+		<!-- Other -->
+		
+		<Key ID="STR_SAA_Civilians_GoAwayAction">
+			<English>"Go away!"</English>
+		</Key>
 	</Package>
 </Project>

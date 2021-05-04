@@ -4,7 +4,7 @@ params ["_civ","_firer"];
 
 if (!local _civ || !alive _civ || {side group vehicle _civ != civilian}) exitWith {};
 
-if (_civ in _civ) then {
+if (isNull objectParent _civ) then {
 	if !(_civ getVariable [QGVAR(panicking),false]) then {
 		switch (round random 2) do {
 			case 0 : {_civ switchMove "ApanPercMstpSnonWnonDnon_G01"};
@@ -18,7 +18,7 @@ if (_civ in _civ) then {
 		unassignVehicle _civ;
 		[_civ] orderGetIn false;
 
-		[{!alive _this || _this in _this},{
+		[{!alive _this || isNull objectParent _this},{
 			if (!alive _this) exitWith {};
 
 			switch (round random 2) do {
@@ -35,6 +35,10 @@ doStop _civ;
 _civ doFollow _civ;
 _civ forceSpeed 999;
 _civ doMove (_civ getPos [150 + random 150,(_firer getDir _civ) + random [-75,0,75]]);
+
+#ifdef DEBUG_MODE_FULL
+	systemChat format ["%1 - Panicking",name _civ];
+#endif
 
 // Return to normal state after it's safe
 _civ setVariable [QGVAR(panicTimeout),CBA_missionTime + GVAR(minPanicTime)];

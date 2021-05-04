@@ -15,13 +15,13 @@ private _roads = (_randPos nearRoads 325) select {
 	_blacklist findIf {_road inArea _x} isEqualTo -1
 };
 
-private _road = [_randPos,_roads] call EFUNC(main,getNearest);
+private _road = [_randPos,_roads] call EFUNC(common,getNearest);
 private _dir = random 360;
 private _noRoad = if (!isNull _road) then {
 	_randPos = getPos _road;
 
 	private _connectedRoads = roadsConnectedTo _road;
-	if !(_connectedRoads isEqualTo []) then {
+	if (_connectedRoads isNotEqualTo []) then {
 		_dir = _road getDir (_connectedRoads # 0);
 	};
 
@@ -66,12 +66,8 @@ doStop _man;
 _man setVariable [QGVAR(hasBrain),true,true];
 _man setVariable [QGVAR(inhabitancy),_area,true];
 
-if !(_man getVariable [QGVAR(willPanic),false]) then {
-	_man setVariable [QGVAR(willPanic),true,true];
-	[_man,"FiredNear",FUNC(panic)] remoteExecCall ["CBA_fnc_addBISEventHandler",0]
-};
+[QGVAR(setSpeaker),[_man,"NoVoice"]] call CBA_fnc_globalEvent;
 
-[_man,"NoVoice"] remoteExec ["setSpeaker",0];
 _man disableAI "TARGET";
 _man disableAI "AUTOTARGET";
 _man disableAI "FSM";
@@ -92,3 +88,8 @@ _man setSpeedMode "LIMITED";
 
 [_man,_customArgs] call _customInit;
 [_vehicle,_customArgs] call _customInit;
+
+_man call FUNC(addPanic);
+
+[QGVAR(manCreated),_man] call CBA_fnc_serverEvent;
+[QGVAR(vehicleCreated),_vehicle] call CBA_fnc_serverEvent;

@@ -8,28 +8,18 @@
 
 	if (isNull _obj) then {
 		[{
-			private _civilians = [];
+			params ["_curatorSelected","_args"];
 			
 			{
 				if (side _x == civilian) then {
-					_civilians append units _x;
+					{_x call FUNC(addPanic)} forEach units _x;
 				};
-			} forEach (_this # 0 # 1);
-
-			{
-				if !(_x getVariable [QGVAR(willPanic),false]) then {
-					_x setVariable [QGVAR(willPanic),true,true];
-					[_x,"FiredNear",FUNC(panic)] remoteExecCall ["CBA_fnc_addBISEventHandler",0]
-				};
-			} forEach _civilians;
-		}] call EFUNC(main,zeusSelection);
+			} forEach (_curatorSelected # 1); // groups
+		}] call EFUNC(common,zeusSelection);
 	} else {
 		if (side group _obj == civilian) then {
-			if !(_obj getVariable [QGVAR(willPanic),false]) then {
-				_obj setVariable [QGVAR(willPanic),true,true];
-				[_obj,"FiredNear",FUNC(panic)] remoteExecCall ["CBA_fnc_addBISEventHandler",0]
-			};
-			[objNull,"SELECTION SUBMITTED"] call BIS_fnc_showCuratorFeedbackMessage;
+			_obj call FUNC(addPanic);
+			[objNull,"PANIC FEATURE ADDED"] call BIS_fnc_showCuratorFeedbackMessage;
 		} else {
 			[objNull,"NOT A CIVILIAN"] call BIS_fnc_showCuratorFeedbackMessage;
 		};

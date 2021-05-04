@@ -19,7 +19,7 @@ private _buildings = (nearestObjects [_randPos,["Building"],200,true]) select {
 	_blacklist findIf {_building inArea _x} isEqualTo -1
 };
 
-if !(_buildings isEqualTo []) then {
+if (_buildings isNotEqualTo []) then {
 	// Use nearest building position as spawn point
 	_randPos = _buildings # 0 getPos [random 15,random 360];
 } else {
@@ -47,12 +47,8 @@ doStop _man;
 _man setVariable [QGVAR(hasBrain),true,true];
 _man setVariable [QGVAR(inhabitancy),_area,true];
 
-if !(_man getVariable [QGVAR(willPanic),false]) then {
-	_man setVariable [QGVAR(willPanic),true,true];
-	[_man,"FiredNear",FUNC(panic)] remoteExecCall ["CBA_fnc_addBISEventHandler",0]
-};
+[QGVAR(setSpeaker),[_man,"NoVoice"]] call CBA_fnc_globalEvent;
 
-[_man,"NoVoice"] remoteExec ["setSpeaker",0];
 _man disableAI "TARGET";
 _man disableAI "AUTOTARGET";
 _man disableAI "FSM";
@@ -69,3 +65,7 @@ _pedGroup setBehaviour "CARELESS";
 _man setSpeedMode "LIMITED";
 
 [_man,_customArgs] call _customInit;
+
+_man call FUNC(addPanic);
+
+[QGVAR(manCreated),_man] call CBA_fnc_serverEvent;

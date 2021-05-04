@@ -10,9 +10,10 @@ params [
 	["_blacklist",[],[[]]],
 	["_customInit",{},[{}]],
 	["_customArgs",[]],
-	["_ambCiv",false,[false]]
+	["_ambCiv",false,[false]],
+	["_spawnDelays",[GVAR(pedSpawnDelay),GVAR(driverSpawnDelay),GVAR(parkedSpawnDelay)],[[]]]
 ];
-
+copyToClipboard str _this;
 // Verification of all input args
 _area = [_area] call CBA_fnc_getArea;
 
@@ -32,26 +33,25 @@ if (_vehicleClasses isEqualTo []) then {
 	_vehicleClasses = VEH_DEFAULTS;
 };
 
-_spawnCounts params [["_pedCount",20,[0]],["_driverCount",8,[0]],["_parkedCount",6,[0]]];
+_spawnCounts params [["_pedestrianCount",20,[0]],["_driverCount",8,[0]],["_parkedCount",6,[0]]];
 
 // If executed via Ambient Civilian system, chance to drop spawn counts
 if (_ambCiv) then {
-	if (random 1 < 0.1) then {_pedCount = _pedCount - round random (_pedCount / 2);};
+	if (random 1 < 0.1) then {_pedestrianCount = _pedestrianCount - round random (_pedestrianCount / 2);};
 	if (random 1 < 0.1) then {_driverCount = _driverCount - round random (_driverCount / 2);};
 	if (random 1 < 0.15) then {_parkedCount = _parkedCount - round random (_parkedCount / 2);};
 };
 
 // Spawn pedestrians
-[_pedCount,FUNC(spawnPedestrian),[createGroup [civilian,true],_area,_blacklist,_unitClasses,_customInit,_customArgs,_ambCiv],GVAR(pedSpawnDelay),true] call EFUNC(main,iterate);
+[_pedestrianCount,FUNC(spawnPedestrian),[createGroup [civilian,true],_area,_blacklist,_unitClasses,_customInit,_customArgs,_ambCiv],_spawnDelays # 0,true] call EFUNC(common,iterate);
 
 // Spawn moving vehicles/drivers
-[_driverCount,FUNC(spawnDriver),[_area,_blacklist,_unitClasses,_vehicleClasses,_customInit,_customArgs,_ambCiv],GVAR(driverSpawnDelay),true] call EFUNC(main,iterate);
+[_driverCount,FUNC(spawnDriver),[_area,_blacklist,_unitClasses,_vehicleClasses,_customInit,_customArgs,_ambCiv],_spawnDelays # 1,true] call EFUNC(common,iterate);
 
 // Spawn parked vehicles
-[_parkedCount,FUNC(spawnParked),[_area,_blacklist,_vehicleClasses,_customInit,_customArgs,_ambCiv],GVAR(parkedSpawnDelay),true] call EFUNC(main,iterate);
+[_parkedCount,FUNC(spawnParked),[_area,_blacklist,_vehicleClasses,_customInit,_customArgs,_ambCiv],_spawnDelays # 2,true] call EFUNC(common,iterate);
 
 if (isNil QGVAR(brainEFID)) then {
 	GVAR(brainList) = [];
-	GVAR(brainIndex) = 0;
 	GVAR(brainEFID) = addMissionEventHandler ["EachFrame",{call FUNC(brain)}];
 };

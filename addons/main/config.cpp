@@ -6,16 +6,7 @@ class CfgPatches {
 		author = "Simplex Team";
 		authors[] = {"Simplex Team"};
 		url = "https://github.com/SceptreOfficial/Simplex-AI-Autonomy";
-		units[] = {
-			"SAA_Module_AssignFree",
-			"SAA_Module_AssignGarrison",
-			"SAA_Module_AssignPatrol",
-			"SAA_Module_AssignQRF",
-			"SAA_Module_AssignSentry",
-			"SAA_Module_Occupy",
-			"SAA_Module_OccupyManage",
-			"SAA_Module_Unassign"
-		};
+		units[] = {};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;
 		requiredAddons[] = {
@@ -34,6 +25,3 @@ class CfgPatches {
 };
 
 #include "CfgEventHandlers.hpp"
-#include "CfgFactionClasses.hpp"
-#include "CfgSounds.hpp"
-#include "CfgVehicles.hpp"

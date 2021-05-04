@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="SAA">
+	<Package name="Common">
+		<Key ID="STR_SAA_Common_SettingParent">
+			<English>SAA Common</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingCategory_AISubSkills">
+			<English>AI Sub-skills</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_applySubSkills">
+			<English>Automatically apply skills</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_applySubSkills">
+			<English>Applies on spawn and locality transfer. Set "SAA_setSkills" variable false on unit to disable.</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillGeneral">
+			<English>Skill: General</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillGeneral">
+			<English>Affects the AI decision making\nRaw "Skill", value is distributed to sub-skills unless defined otherwise</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillCommanding">
+			<English>Skill: Commanding</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillCommanding">
+			<English>Higher values make AI report targets faster</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillCourage">
+			<English>Skill: Courage</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillCourage">
+			<English>Higher values make AI have more courage/morale</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillAimingAccuracy">
+			<English>Skill: Aiming Accuracy</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillAimingAccuracy">
+			<English>Higher values make AI lead targets better\nHigher values make AI estimate range and calculate bullet drop more precicely\nHigher values make AI compensate weapon dispersion better\nHigher values make AI control recoil better\nHigher values can make AI open fire with less target knowledge</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillAimingShake">
+			<English>Skill: Aiming Shake</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillAimingShake">
+			<English>Higher values make AI hold weapons more steady for better precision</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillAimingSpeed">
+			<English>Skill: Aiming Speed</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillAimingSpeed">
+			<English>Higher values make AI rotate and stabilize aim faster</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillReloadSpeed">
+			<English>Skill: Reload Speed</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillReloadSpeed">
+			<English>Higher values make AI switch or reload weapons faster</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillSpotDistance">
+			<English>Skill: Spot Distance</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillSpotDistance">
+			<English>Higher values make AI better at spotting targets\nHigher values make AI collect information about targets more precisely</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingName_skillSpotTime">
+			<English>Skill: Spot Time</English>
+		</Key>
+		<Key ID="STR_SAA_Common_SettingInfo_skillSpotTime">
+			<English>Higher values make AI react faster to death, damage, or enemies</English>
+		</Key>
+	</Package>
+</Project>

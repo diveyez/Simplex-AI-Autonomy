@@ -1,4 +1,6 @@
+PREP(addPanic);
 PREP(brain);
+PREP(clockwork);
 PREP(create);
 PREP(moduleAddPanic);
 PREP(moduleBlacklistArea);
@@ -7,6 +9,7 @@ PREP(moduleToggle);
 PREP(panic);
 PREP(populate);
 PREP(remove);
+PREP(spawnAircraft);
 PREP(spawnCleanup);
 PREP(spawnDriver);
 PREP(spawnParked);

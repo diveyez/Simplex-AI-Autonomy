@@ -1,48 +1,66 @@
 #include "script_component.hpp"
 
-params [["_spawnPoint",objNull],["_isolated",false]];
+params [["_spawnPoint",objNull],["_isolated",false],["_deletedEH",false]];
 
 if (isNull _spawnPoint) exitWith {
 	GVAR(spawnPoints) deleteAt (GVAR(spawnPoints) find _spawnPoint);
 };
 
 private _spawnRadius = triggerArea _spawnPoint # 0;
+private _type = _spawnPoint getVariable QGVAR(type);
 
 {
-	if (!isNull _x) then {
-		private _vehicle = vehicle _x;
+	if (isNull _x) then {continue};
 
-		if (crew _vehicle isEqualTo []) then {
-			private _PFHID = [{
-				params ["_args","_PFHID"];
-				_args params ["_vehicle","_isolated","_spawnRadius"];
+	private _vehicle = vehicle _x;
 
-				if (!_isolated && {_vehicle getVariable [QGVAR(firstExec),true]}) exitWith {
-					_vehicle setVariable [QGVAR(firstExec),false];
-				};
+	if (crew _vehicle isEqualTo []) then {
+		_vehicle setVariable [QGVAR(isolated),_isolated];
 
-				if (!alive _vehicle || !(crew _vehicle isEqualTo [])) exitWith {
-					_PFHID call CBA_fnc_removePerFrameHandler;
-				};
+		private _PFHID = [{
+			params ["_args","_PFHID"];
+			_args params ["_vehicle","_spawnRadius"];
 
-				if ((allPlayers findIf {!(_x isKindOf "HeadlessClient_F") && {_vehicle distance _x < (_spawnRadius / 2)}}) isEqualTo -1) then {
-					deleteVehicle _vehicle;
-				};
-			},30,[_vehicle,_isolated,_spawnRadius]] call CBA_fnc_addPerFrameHandler;
+			if !(_vehicle getVariable [QGVAR(isolated),false]) exitWith {
+				_vehicle setVariable [QGVAR(isolated),true];
+			};
 
-			[_vehicle,"GetIn",{
-				params ["_vehicle"];
-				_vehicle removeEventHandler [_thisType,_thisID];
-				_thisArgs call CBA_fnc_removePerFrameHandler;
-			},_PFHID] call CBA_fnc_addBISEventHandler;
-		} else {
-			if (side group _vehicle == civilian) then {
-				{_vehicle deleteVehicleCrew _x} forEach crew _vehicle;
+			if (!alive _vehicle || crew _vehicle isNotEqualTo []) exitWith {
+				_PFHID call CBA_fnc_removePerFrameHandler;
+			};
+
+			if ((allPlayers findIf {!(_x isKindOf "HeadlessClient_F") && {_vehicle distance _x < (_spawnRadius / 2)}}) isEqualTo -1) then {
 				deleteVehicle _vehicle;
 			};
+		},30,[_vehicle,_spawnRadius]] call CBA_fnc_addPerFrameHandler;
+
+		[_vehicle,"GetIn",{
+			params ["_vehicle"];
+			_vehicle removeEventHandler [_thisType,_thisID];
+			_thisArgs call CBA_fnc_removePerFrameHandler;
+		},_PFHID] call CBA_fnc_addBISEventHandler;
+	} else {
+		private _transfer = GVAR(spawnPoints) findIf {
+			_x != _spawnPoint && 
+			(_spawnPoint getVariable QGVAR(type)) == _type && 
+			{_vehicle inArea _x}
+		};
+
+		if (_transfer != -1) exitWith {
+			private _newSpawnPoint = GVAR(spawnPoints) # _transfer;
+			_newSpawnPoint setVariable [QGVAR(objects),(_newSpawnPoint getVariable [QGVAR(objects),[]]) + [_x]];
+			_x setVariable [QGVAR(moveTick),-1];
+		};
+
+		if (side group _vehicle == civilian) then {
+			{_vehicle deleteVehicleCrew _x} forEach crew _vehicle;
+			deleteVehicle _vehicle;
 		};
 	};
 } forEach (_spawnPoint getVariable [QGVAR(objects),[]]);
 
 GVAR(spawnPoints) deleteAt (GVAR(spawnPoints) find _spawnPoint);
+
+if (_deletedEH) exitWith {};
+
 deleteVehicle _spawnPoint;

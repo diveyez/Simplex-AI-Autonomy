@@ -25,7 +25,7 @@ while {
 		_blacklist findIf {_road inArea _x} isEqualTo -1
 	};
 
-	private _road = [_randPos,_roads] call EFUNC(main,getNearest);
+	private _road = [_randPos,_roads] call EFUNC(common,getNearest);
 
 	private _buildings = (nearestObjects [_randPos,["Building"],100,true]) select {
 		private _building = _x;
@@ -39,12 +39,12 @@ while {
 		};
 	};
 
-	if !(_buildings isEqualTo []) then {
+	if (_buildings isNotEqualTo []) then {
 		private _building = _buildings # 0;
 		_spawnPos = getPos _building findEmptyPosition [sizeOf typeOf _building / 2,60,_class];
 
-		if (!(_spawnPos isEqualTo []) && {isOnRoad _spawnPos}) then {
-			private _road = [_spawnPos,_spawnPos nearRoads 15] call EFUNC(main,getNearest);
+		if (_spawnPos isNotEqualTo [] && {isOnRoad _spawnPos}) then {
+			private _road = [_spawnPos,_spawnPos nearRoads 15] call EFUNC(common,getNearest);
 			private _connectedRoads = roadsConnectedTo _road;
 			if !(_connectedRoads isEqualTo []) then {
 				_dir = (_road getDir (_connectedRoads # 0)) + selectRandom [180,0];
@@ -66,7 +66,7 @@ while {
 	} else {
 		if (!isNull _road && {random 1 < 0.65}) then {
 			private _connectedRoads = roadsConnectedTo _road;
-			if !(_connectedRoads isEqualTo []) then {
+			if (_connectedRoads isNotEqualTo []) then {
 				_dir = _road getDir (_connectedRoads # 0);
 			};
 
@@ -110,3 +110,5 @@ _vehicle setDir _dir;
 },[_vehicle,_spawnPos],1] call CBA_fnc_waitAndExecute;
 
 [_vehicle,_customArgs] call _customInit;
+
+[QGVAR(vehicleCreated),_vehicle] call CBA_fnc_serverEvent;

@@ -14,9 +14,7 @@ class CfgPatches {
 		};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;
-		requiredAddons[] = {
-			"saa_main"
-		};
+		requiredAddons[] = {"saa_main"};
 		VERSION_CONFIG;
 	};
 };
