@@ -35,5 +35,6 @@ if (_group isEqualType []) then {
 		{allPlayers findIf {!(_x isKindOf "HeadlessClient_F") && {_cachePos distance getPosASL _x < GVAR(cachingDistance)}} != -1}
 	) then {
 		_group call FUNC(uncache);
+		GVAR(cache) deleteAt (GVAR(cache) find _group);
 	};
 };

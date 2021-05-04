@@ -61,12 +61,9 @@ private _positions = [];
 
 // Cache
 private _cachePos = _positions call EFUNC(common,positionAvg);
+private _id = format ["%1$%2",_group,_cachePos];
 
-GVAR(cache) pushBack [
-	format ["%1$%2",_group,_cachePos],
-	_cachePos
-];
-
+GVAR(cache) pushBack [_id,_cachePos];
 GVAR(cacheHash) set [_id,[
 	[
 		_assignment,
