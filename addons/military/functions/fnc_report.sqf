@@ -1,5 +1,5 @@
 #include "script_component.hpp"
-private _st = diag_tickTime;
+
 params ["_group"];
 
 if (isNull _group || {{alive _x} count units _group isEqualTo 0}) exitWith {};
@@ -48,5 +48,3 @@ if (GVAR(flaresEnabled) && !(call EFUNC(common,isDaytime)) && random 1 < GVAR(fl
 		};
 	},_newTargets,10 + round random 15] call CBA_fnc_waitAndExecute;
 };
-
-systemChat format ["PERF COUNTER: %1 ms",diag_tickTime - _st];
