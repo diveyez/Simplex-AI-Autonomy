@@ -26,10 +26,15 @@ if (!local _logic) exitWith {};
 				private _factionHash = (uiNamespace getVariable QGVAR(sideHash)) get _sideSelection;
 				
 				{
-					private _categoryHash = _factionHash get _x;
-					_classesTree pushBack [
-						getText (_cfgFactions >> _x >> "displayName"),"",(keys _categoryHash) apply {[_x,"",_categoryHash get _x]}
-					];
+					private _classes = (_factionHash get _x) apply {[_x,"",_y]};
+					_classes sort true;
+					_classesTree pushBack [getText (_cfgFactions >> _x >> "displayName"),"",_classes];
+
+					//private _categoryKeys = keys _categoryHash;
+					//_categoryKeys sort true;
+					//_classesTree pushBack [
+					//	getText (_cfgFactions >> _x >> "displayName"),"",_categoryKeys apply {[_x,"",_categoryHash get _x]}
+					//];
 				} forEach keys _factionHash;
 				
 				_classesTree sort true;
@@ -37,7 +42,7 @@ if (!local _logic) exitWith {};
 				[5,[_classesTree]] call EFUNC(SDF,setValueData);
 				[17,[(GVAR(occupationPresets) # _sideSelection) apply {_x # 0},0]] call EFUNC(SDF,setValueData);
 			}],
-			[[0,1,18,5],"TREE","AllClasses",[[]]],
+			[[0,1,18,5],"TREE","AllClasses",[[],nil,{_this call ([6] call EFUNC(SDF,getValue))}]],
 			[[0,6,9,1],"BUTTON","Add unit type",{
 				private _class = 5 call EFUNC(SDF,getValue);
 
@@ -58,7 +63,7 @@ if (!local _logic) exitWith {};
 				GVAR(classList) # 1 deleteAt _classSelection;
 				[8,[GVAR(classList) # 0,_classSelection]] call EFUNC(SDF,setValueData);
 			}],
-			[[0,7,18,5],"LISTNBOX","ClassList",[[]]],
+			[[0,7,18,5],"LISTNBOX","ClassList",[[],nil,{_this call ([7] call EFUNC(SDF,getValue))}]],
 			[[0,12,2,1],"TEXT","Min:"],
 			[[2,12,7,1],"SLIDER","Min",[[0,25,0],1]],
 			[[9,12,2,1],"TEXT","Max:"],
