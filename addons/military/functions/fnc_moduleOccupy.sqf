@@ -63,7 +63,7 @@ if (!local _logic) exitWith {};
 				GVAR(classList) # 1 deleteAt _classSelection;
 				[8,[GVAR(classList) # 0,_classSelection]] call EFUNC(SDF,setValueData);
 			}],
-			[[0,7,18,5],"LISTNBOX","ClassList",[[],nil,{_this call ([7] call EFUNC(SDF,getValue))}]],
+			[[0,7,18,5],"LISTNBOX","ClassList",[[],nil,[],{_this call (7 call EFUNC(SDF,getValue))}]],
 			[[0,12,2,1],"TEXT","Min:"],
 			[[2,12,7,1],"SLIDER","Min",[[0,25,0],1]],
 			[[9,12,2,1],"TEXT","Max:"],
