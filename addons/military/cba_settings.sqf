@@ -34,7 +34,7 @@
 [QGVAR(cachingDistance),"SLIDER",
 	[LSTRING(SettingName_cachingDistance),LSTRING(SettingInfo_cachingDistance)],
 	[LSTRING(SettingParent),LSTRING(SettingCategory_Caching)],
-	[0,10000,1800,0],
+	[0,10000,2000,0],
 	true,
 	{},
 	false
@@ -42,6 +42,51 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Spotting
+
+[QGVAR(RatingHelicopter),"SLIDER",
+	[LSTRING(SettingName_RatingHelicopter),LSTRING(SettingInfo_RatingHelicopter)],
+	[LSTRING(SettingParent),LSTRING(SettingCategory_Spotting)],
+	[1,20,7,1],
+	true,
+	{},
+	false
+] call CBA_fnc_addSetting;
+
+[QGVAR(RatingTank),"SLIDER",
+	[LSTRING(SettingName_RatingTank),LSTRING(SettingInfo_RatingTank)],
+	[LSTRING(SettingParent),LSTRING(SettingCategory_Spotting)],
+	[1,20,6,1],
+	true,
+	{},
+	false
+] call CBA_fnc_addSetting;
+
+[QGVAR(RatingCar),"SLIDER",
+	[LSTRING(SettingName_RatingCar),LSTRING(SettingInfo_RatingCar)],
+	[LSTRING(SettingParent),LSTRING(SettingCategory_Spotting)],
+	[1,20,3,1],
+	true,
+	{},
+	false
+] call CBA_fnc_addSetting;
+
+[QGVAR(AssistCoef),"SLIDER",
+	[LSTRING(SettingName_AssistCoef),LSTRING(SettingInfo_AssistCoef)],
+	[LSTRING(SettingParent),LSTRING(SettingCategory_Spotting)],
+	[1,10,1.3,1],
+	true,
+	{},
+	false
+] call CBA_fnc_addSetting;
+
+[QGVAR(QRFRatio),"SLIDER",
+	[LSTRING(SettingName_QRFRatio),LSTRING(SettingInfo_QRFRatio)],
+	[LSTRING(SettingParent),LSTRING(SettingCategory_Spotting)],
+	[0.1,1,0.65,0,true],
+	true,
+	{},
+	false
+] call CBA_fnc_addSetting;
 
 [QGVAR(flaresEnabled),"CHECKBOX",
 	[LSTRING(SettingName_flaresEnabled),LSTRING(SettingInfo_flaresEnabled)],

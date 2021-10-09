@@ -43,6 +43,36 @@
 		<Key ID="STR_SAA_Military_SettingInfo_cachingDistance">
 			<English>How far away players must before AI is cached</English>
 		</Key>
+		<Key ID="STR_SAA_Military_SettingName_RatingHelicopter">
+			<English>Rating: Helicopter</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingInfo_RatingHelicopter">
+			<English>How AI rates the encountered threat</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingName_RatingTank">
+			<English>Rating: Tank</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingInfo_RatingTank">
+			<English>How AI rates the encountered threat</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingName_RatingCar">
+			<English>Rating: Car</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingInfo_RatingCar">
+			<English>How AI rates the encountered threat</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingName_AssistCoef">
+			<English>Assistance multiplier</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingInfo_AssistCoef">
+			<English>Ratio of units needed to confront enemies \n(Threat rating * Assistance multiplier)</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingName_QRFRatio">
+			<English>QRF ratio</English>
+		</Key>
+		<Key ID="STR_SAA_Military_SettingInfo_QRFRatio">
+			<English>Percentage of assistance pool that should be QRF \n(QRF has higher priority to respond to threats compared to other assignments)</English>
+		</Key>
 		<Key ID="STR_SAA_Military_SettingName_flaresEnabled">
 			<English>Flares</English>
 		</Key>

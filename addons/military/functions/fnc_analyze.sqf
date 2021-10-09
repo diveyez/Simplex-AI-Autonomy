@@ -1,7 +1,7 @@
 #include "script_component.hpp"
-#define RATING_HELI 7
-#define RATING_TANK 6
-#define RATING_CAR 3
+#define RATING_HELI GVAR(RatingHelicopter)
+#define RATING_TANK GVAR(RatingTank)
+#define RATING_CAR GVAR(RatingCar)
 
 params ["_group","_side","_targets"];
 
@@ -14,8 +14,8 @@ private _strength = 0;
 ([_targets,false] call FUNC(getTypes)) params ["_enemyInfantry","","_enemyTanks","_enemyCars"];
 
 private _threatRating = count _enemyInfantry + count _enemyTanks * RATING_TANK + count _enemyCars * RATING_CAR;
-private _assistRatio = _threatRating * 1.3;
-private _QRFRatio = _assistRatio * 0.65;
+private _assistRatio = _threatRating * GVAR(AssistCoef);
+private _QRFRatio = _assistRatio * GVAR(QRFRatio);
 //private _vehicleRatio = _assistRatio * 0.3;
 
 // Add the reporting group if it's free
