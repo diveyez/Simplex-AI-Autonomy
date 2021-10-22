@@ -27,12 +27,11 @@
 
 ### Description
 
-**Simplex AI Autonomy** is an AI management system designed to help zeus setup quick scenarios and not need to micro-manage AI. Once an AI group is assigned a certain role, the management system will make the AI fulfill that role, respond to enemy threats, and request assistance where needed.
+**Simplex AI Autonomy** is an AI management system designed to help zeus setup quick scenarios and without needing to manage AI.
 
 For usage instructions, please see the [wiki](https://github.com/SceptreOfficial/Simplex-AI-Autonomy/wiki).
 
-SAA is still under development, with many features yet to be implemented and bugs still to be found.
-Feel free to contribute, submit issues, or suggest any new features via the [issue tracker](https://github.com/SceptreOfficial/Simplex-AI-Autonomy/issues).
+SAA is still under development, submit issues or suggest any new features via the [issue tracker](https://github.com/SceptreOfficial/Simplex-AI-Autonomy/issues).
 
 ### License
 
