@@ -13,7 +13,7 @@ params [
 	["_ambCiv",false,[false]],
 	["_spawnDelays",[GVAR(pedSpawnDelay),GVAR(driverSpawnDelay),GVAR(parkedSpawnDelay)],[[]]]
 ];
-copyToClipboard str _this;
+
 // Verification of all input args
 _area = [_area] call CBA_fnc_getArea;
 
