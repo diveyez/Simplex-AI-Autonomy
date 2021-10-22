@@ -25,7 +25,7 @@
 [QGVAR(cachingDefault),"CHECKBOX",
 	[LSTRING(SettingName_cachingDefault),LSTRING(SettingInfo_cachingDefault)],
 	[LSTRING(SettingParent),LSTRING(SettingCategory_Caching)],
-	true,
+	false,
 	true,
 	{},
 	false

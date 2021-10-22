@@ -18,7 +18,7 @@ if (_localitySelection > (count EGVAR(common,headlessClients) + 1)) exitWith {
 // Server transfer
 if (_localitySelection == 1) exitWith {
 	[
-		2,
+		[0,2] select isMultiplayer,
 		_groups,
 		[_groups,_assignment,_requestDistance,_responseDistance,_extras],
 		{[QGVAR(addGroups),_this] call CBA_fnc_localEvent}
@@ -27,14 +27,12 @@ if (_localitySelection == 1) exitWith {
 
 // HC transfer
 if (_localitySelection > 1) exitWith {
-	private _ID = owner (EGVAR(common,headlessClients) # (_localitySelection - 2));
-
-	[QEGVAR(common,transferGroups),[
-		_ID,
+	[
+		owner (EGVAR(common,headlessClients) # (_localitySelection - 2)),
 		_groups,
 		[_groups,_assignment,_requestDistance,_responseDistance,_extras],
 		{[QGVAR(addGroups),_this] call CBA_fnc_localEvent}
-	],_ID] call CBA_fnc_ownerEvent;
+	] call EFUNC(common,transferGroups);
 };
 
 // Keep current localities
