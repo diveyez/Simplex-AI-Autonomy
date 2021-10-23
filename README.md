@@ -27,7 +27,7 @@
 
 ### Description
 
-**Simplex AI Autonomy** is an AI management system designed to help zeus setup quick scenarios and without needing to manage AI.
+**Simplex AI Autonomy** is designed to help Zeus setup quick scenarios and without needing to manage AI.
 
 For usage instructions, please see the [wiki](https://github.com/SceptreOfficial/Simplex-AI-Autonomy/wiki).
 
