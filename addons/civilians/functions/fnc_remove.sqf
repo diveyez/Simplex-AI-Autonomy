@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params [["_spawnPoint",objNull],["_isolated",false],["_deletedEH",false]];
+params [["_spawnPoint",objNull],["_isolated",false],["_removeAll",false]];
 
 if (isNull _spawnPoint) exitWith {
 	GVAR(spawnPoints) deleteAt (GVAR(spawnPoints) find _spawnPoint);
@@ -15,6 +15,8 @@ private _type = _spawnPoint getVariable QGVAR(type);
 	private _vehicle = vehicle _x;
 
 	if (crew _vehicle isEqualTo []) then {
+		if (_removeAll) exitWith {deleteVehicle _vehicle};
+		
 		_vehicle setVariable [QGVAR(isolated),_isolated];
 
 		private _PFHID = [{
@@ -40,6 +42,13 @@ private _type = _spawnPoint getVariable QGVAR(type);
 			_thisArgs call CBA_fnc_removePerFrameHandler;
 		},_PFHID] call CBA_fnc_addBISEventHandler;
 	} else {
+		if (_removeAll) exitWith {
+			if (crew _vehicle findIf {isPlayer _x} == -1) then {
+				deleteVehicleCrew _vehicle;
+				deleteVehicle _vehicle;
+			};
+		};
+
 		private _transfer = GVAR(spawnPoints) findIf {
 			_x != _spawnPoint && 
 			(_spawnPoint getVariable QGVAR(type)) == _type && 
@@ -60,7 +69,5 @@ private _type = _spawnPoint getVariable QGVAR(type);
 } forEach (_spawnPoint getVariable [QGVAR(objects),[]]);
 
 GVAR(spawnPoints) deleteAt (GVAR(spawnPoints) find _spawnPoint);
-
-if (_deletedEH) exitWith {};
 
 deleteVehicle _spawnPoint;
