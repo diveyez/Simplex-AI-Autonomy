@@ -35,7 +35,7 @@ _spawnPoint setVariable [QGVAR(type),_type];
 		params ["_object","_spawnPoint"];
 
 		if (isNull _spawnPoint) then {
-			{_object deleteVehicleCrew _x} forEach crew _object;
+			deleteVehicleCrew _object;
 			deleteVehicle _object;
 		} else {
 			_spawnPoint setVariable [QGVAR(objects),(_spawnPoint getVariable [QGVAR(objects),[]]) + [_object]];

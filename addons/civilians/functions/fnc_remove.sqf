@@ -62,7 +62,7 @@ private _type = _spawnPoint getVariable QGVAR(type);
 		};
 
 		if (side group _vehicle == civilian) then {
-			{_vehicle deleteVehicleCrew _x} forEach crew _vehicle;
+			deleteVehicleCrew _vehicle;
 			deleteVehicle _vehicle;
 		};
 	};

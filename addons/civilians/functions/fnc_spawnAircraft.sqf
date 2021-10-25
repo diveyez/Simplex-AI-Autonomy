@@ -33,7 +33,7 @@ _wp setWaypointStatements ["true","
 	private _vehicle = vehicle this;
 
 	if (local _group) then {
-		{_vehicle deleteVehicleCrew _x} forEach crew _vehicle;
+		deleteVehicleCrew _vehicle;
 		deleteGroup	_group;
 		deleteVehicle _vehicle;
 	};
@@ -46,7 +46,7 @@ if (GVAR(aircraftTTL) >= 1) then {
 
 		if (isNull _vehicle) exitWith {};
 
-		{_vehicle deleteVehicleCrew _x} forEach crew _vehicle;
+		deleteVehicleCrew _vehicle;
 		deleteGroup	_group;
 		deleteVehicle _vehicle;
 	},[_group,_aircraft],GVAR(aircraftTTL)] call CBA_fnc_waitAndExecute;
