@@ -75,7 +75,7 @@ switch (_assignment) do {
 
 		_group setVariable [QGVAR(garrisonType),_garrisonType,true];
 
-		[FUNC(garrison),[_group,_teleport],2] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
+		[FUNC(garrison),[_group,_teleport],1] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
 	};
 
 	case "PATROL" : {
@@ -96,7 +96,7 @@ switch (_assignment) do {
 		if ((_group getVariable QGVAR(origin)) # 0 distance leader _group > 20) then {
 			_group call FUNC(returnToOrigin);
 		} else {
-			[FUNC(mountQRF),_group,2] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
+			[FUNC(mountQRF),_group,1] call CBA_fnc_waitAndExecute; // Delay for locality transfer issue
 		};
 	};
 
