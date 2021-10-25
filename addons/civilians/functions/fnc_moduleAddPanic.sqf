@@ -19,9 +19,9 @@
 	} else {
 		if (side group _obj == civilian) then {
 			_obj call FUNC(addPanic);
-			[objNull,"PANIC FEATURE ADDED"] call BIS_fnc_showCuratorFeedbackMessage;
+			[objNull,LLSTRING(Module_AddPanic_Added)] call BIS_fnc_showCuratorFeedbackMessage;
 		} else {
-			[objNull,"NOT A CIVILIAN"] call BIS_fnc_showCuratorFeedbackMessage;
+			[objNull,LLSTRING(Module_AddPanic_NotCiv)] call BIS_fnc_showCuratorFeedbackMessage;
 		};
 	};
 },_this] call CBA_fnc_directCall;

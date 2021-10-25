@@ -7,10 +7,11 @@ class CfgPatches {
 		authors[] = {"Simplex Team"};
 		url = "https://github.com/SceptreOfficial/Simplex-AI-Autonomy";
 		units[] = {
-			"SAA_Civ_Module_AddPanic",
-			"SAA_Civ_Module_BlacklistArea",
-			"SAA_Civ_Module_Populate",
-			"SAA_Civ_Module_Toggle"
+			QGVAR(Module_AddPanic),
+			QGVAR(Module_BlacklistArea),
+			QGVAR(Module_Populate),
+			QGVAR(Module_ToggleAircraft),
+			QGVAR(Module_ToggleCivilians)
 		};
 		weapons[] = {};
 		requiredVersion = REQUIRED_VERSION;

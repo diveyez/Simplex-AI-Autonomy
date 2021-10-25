@@ -19,11 +19,11 @@
 		
 		<!-- Settings -->
 
-		<Key ID="STR_SAA_Civilians_SettingName_aircraftEnabled">
-			<English>Enable ambient aircraft</English>
+		<Key ID="STR_SAA_Civilians_SettingName_autoStartAircraft">
+			<English>Auto-start (server)</English>
 		</Key>
-		<Key ID="STR_SAA_Civilians_SettingInfo_aircraftEnabled">
-			<English>Random aircraft flyovers</English>
+		<Key ID="STR_SAA_Civilians_SettingInfo_autoStartAircraft">
+			<English>Starts the ambient aircraft system on the server when the mission loads</English>
 		</Key>
 		<Key ID="STR_SAA_Civilians_SettingName_aircraftChance">
 			<English>Chance</English>
@@ -146,8 +146,81 @@
 			<English>Minimum time in seconds civilians will stay in a panicked state</English>
 		</Key>
 
+		<!-- Modules -->
+
+		<Key ID="STR_SAA_Civilians_Module_AddPanic">
+			<English>Add Panic Feature</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_AddPanic_Added">
+			<English>PANIC FEATURE ADDED</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_AddPanic_NotCiv">
+			<English>NOT A CIVILIAN</English>
+		</Key>
+
+		<Key ID="STR_SAA_Civilians_Module_BlacklistArea">
+			<English>Blacklist Area</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_BlacklistArea_Added">
+			<English>BLACKLIST ADDED</English>
+		</Key>
+
+		<Key ID="STR_SAA_Civilians_Module_Populate">
+			<English>Populate</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_Populate_AreaPopulated">
+			<English>AREA POPULATED</English>
+		</Key>
+
+		<Key ID="STR_SAA_Civilians_Module_ToggleAircraft">
+			<English>Toggle Ambient Aircraft</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_ToggleAircraft_Title">
+			<English>Enable Ambient Aircraft</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_ToggleAircraft_Enabled">
+			<English>AMBIENT AIRCRAFT ENABLED</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_ToggleAircraft_Disabled">
+			<English>AMBIENT AIRCRAFT DISABLED</English>
+		</Key>
+
+		<Key ID="STR_SAA_Civilians_Module_ToggleCivilians">
+			<English>Toggle Ambient Civilians</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_ToggleCivilians_Title">
+			<English>Enable Ambient Civilians</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_ToggleCivilians_Enabled">
+			<English>AMBIENT CIVILIANS ENABLED</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Module_ToggleCivilians_Disabled">
+			<English>AMBIENT CIVILIANS DISABLED</English>
+		</Key>
+
 		<!-- Other -->
 		
+		<Key ID="STR_SAA_Civilians_Locality">
+			<English>Locality</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_LocalityGroupsInfo">
+			<English>Spawns groups on specified machine</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_LocalityToggleInfo">
+			<English>Start on specified machine</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Locality">
+			<English>Locality</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Local">
+			<English>Local</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_Server">
+			<English>Server</English>
+		</Key>
+		<Key ID="STR_SAA_Civilians_HC">
+			<English>HC: </English>
+		</Key>
 		<Key ID="STR_SAA_Civilians_GoAwayAction">
 			<English>"Go away!"</English>
 		</Key>

@@ -42,8 +42,10 @@ if (isServer) then {
 
 GVAR(blacklist) = []; // Blacklist areas (Can be of type: marker, trigger, location, area array)
 GVAR(spawnPoints) = [];
-GVAR(runner) = objNull;
-GVAR(isRunning) = false;
+GVAR(aircraftRunner) = objNull;
+GVAR(civiliansRunner) = objNull;
+GVAR(ambientAircraft) = false;
+GVAR(ambientCivilians) = false;
 
 if (isServer) then {
 	if (isNil QGVAR(brainEFID)) then {
@@ -55,29 +57,35 @@ if (isServer) then {
 	addMissionEventHandler ["HandleDisconnect",{
 		params ["_unit"];
 
-		if (isNull GVAR(runner)) exitWith {false};
+		if (isNull GVAR(aircraftRunner) || isNull GVAR(civiliansRunner)) exitWith {false};
 
-		if (_unit isEqualTo GVAR(runner) && GVAR(isRunning)) then {
-			missionNamespace setVariable [QGVAR(isRunning),false,true];
-			missionNamespace setVariable [QGVAR(runner),objNull,true];
+		if (_unit isEqualTo GVAR(aircraftRunner) && GVAR(ambientAircraft)) then {
+			missionNamespace setVariable [QGVAR(ambientAircraft),false,true];
+			missionNamespace setVariable [QGVAR(aircraftRunner),objNull,true];
+		};
+
+		if (_unit isEqualTo GVAR(civiliansRunner) && GVAR(ambientCivilians)) then {
+			missionNamespace setVariable [QGVAR(ambientCivilians),false,true];
+			missionNamespace setVariable [QGVAR(civiliansRunner),objNull,true];
 		};
 
 		false
 	}];
 
 	[QGVAR(toggle),{
-		params [["_localitySelection",0,[0]]];
+		params [["_localitySelection",0,[0]],"_toggleFnc","_toggleVar","_runnerVar"];
+
+		private _running = missionNamespace getVariable [_toggleVar,false];
+		private _runner = missionNamespace getVariable [_runnerVar,objNull];
 
 		// End on HC
-		if (!isNull GVAR(runner)) exitWith {
-			[QEGVAR(common,execute),QFUNC(toggle),GVAR(runner)] call CBA_fnc_targetEvent;
-			missionNamespace setVariable [QGVAR(runner),objNull,true];
+		if (!isNull _runner) exitWith {
+			[QEGVAR(common,execute),_toggleFnc,_runner] call CBA_fnc_targetEvent;
+			missionNamespace setVariable [_runnerVar,objNull,true];
 		};
 
 		// End on server
-		if (GVAR(isRunning)) exitWith {
-			[] call FUNC(toggle);
-		};
+		if (_running) exitWith {[] call _toggleFnc};
 
 		if (_localitySelection > count EGVAR(common,headlessClients)) exitWith {
 			diag_log "Headless client(s) disconnected during selection. Cancelling occupation.";
@@ -85,16 +93,15 @@ if (isServer) then {
 
 		// Server exec
 		if (_localitySelection == 0) exitWith {
-			missionNamespace setVariable [QGVAR(runner),objNull,true];
-			[] call FUNC(toggle);
+			missionNamespace setVariable [_runnerVar,objNull,true];
+			[] call _toggleFnc;
 		};
 
 		// HC exec
 		if (_localitySelection > 0) then {
 			private _headlessClient = EGVAR(common,headlessClients) # (_localitySelection - 1);
-			missionNamespace setVariable [QGVAR(runner),_headlessClient,true];
-
-			[QEGVAR(common,execute),QFUNC(toggle),_headlessClient] call CBA_fnc_targetEvent;
+			missionNamespace setVariable [_runnerVar,_headlessClient,true];
+			[QEGVAR(common,execute),_toggleFnc,_headlessClient] call CBA_fnc_targetEvent;
 		};
 	}] call CBA_fnc_addEventHandler;
 

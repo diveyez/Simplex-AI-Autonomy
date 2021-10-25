@@ -23,12 +23,12 @@ if (!local _logic) exitWith {};
 	};
 
 	[[36,21],[
-		[[0,0,36,1],"STRUCTUREDTEXT","<t align='center'>Blacklist Area</t>",EGVAR(SDF,profileRGBA)],
+		[[0,0,36,1],"STRUCTUREDTEXT",format ["<t align='center'>%1</t>",LLSTRING(Module_BlacklistArea)],EGVAR(SDF,profileRGBA)],
 		[[0,1,36,19],"MAP2","",[[_pos,100,100,0,false],"SOLID"]],
-		[[0,20,18,1],"BUTTON","CANCEL",{{
+		[[0,20,18,1],"BUTTON",localize "STR_SDF_CANCEL",{{
 			{deleteMarkerLocal _x} forEach GVAR(blackListTempMarkers);
 		} call EFUNC(SDF,close)}],
-		[[18,20,18,1],"BUTTON","CONFIRM",{[{
+		[[18,20,18,1],"BUTTON",localize "STR_SDF_CONFIRM",{[{
 			{deleteMarkerLocal _x} forEach GVAR(blackListTempMarkers);
 
 			params ["_values","_pos"];
@@ -36,7 +36,7 @@ if (!local _logic) exitWith {};
 
 			[QGVAR(addBlacklist),[_area]] call CBA_fnc_serverEvent;
 
-			[objNull,"Blacklist added"] call BIS_fnc_showCuratorFeedbackMessage;
+			[objNull,LLSTRING(Module_BlacklistArea_Added)] call BIS_fnc_showCuratorFeedbackMessage;
 		},true] call EFUNC(SDF,close)}]
 	]] call EFUNC(SDF,dialog);
 },_this] call CBA_fnc_directCall;

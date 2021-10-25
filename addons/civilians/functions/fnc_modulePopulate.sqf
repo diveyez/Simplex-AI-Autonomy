@@ -25,24 +25,24 @@ if (!local _logic) exitWith {};
 	};
 
 	[[36,20],[
-		[[0,0,36,1],"STRUCTUREDTEXT","<t align='center'>Populate Area</t>",EGVAR(SDF,profileRGBA)],
+		[[0,0,36,1],"STRUCTUREDTEXT",format ["<t align='center'>%1</t>",LLSTRING(Module_Populate)],EGVAR(SDF,profileRGBA)],
 		[[18,1,18,19],"MAP2","",[[_pos,100,100,0,false],"SOLID"]],
 		[[6,1,12,1],"EDITBOX","Units",str UNIT_CLASSES,false],
 		[[6,2,12,1],"EDITBOX","Vehicles",str VEH_CLASSES,false],
 		[[6,3,12,1],"SLIDER","Pedestrians",[[0,100,0],0],false],
 		[[6,4,12,1],"SLIDER","Driving",[[0,50,0],0],false],
 		[[6,5,12,1],"SLIDER","Parked",[[0,50,0],0],false],
-		[[6,6,12,1],"COMBOBOX","Locality",[["Local","Server"] + (EGVAR(common,headlessClients) apply {"HC: " + str _x}),0],false],
-		[[0,1,6,1],"TEXT","Unit classes:"],
-		[[0,2,6,1],"TEXT","Vehicle classes:"],
-		[[0,3,6,1],"TEXT","Pedestrians:"],
-		[[0,4,6,1],"TEXT","Driving vehicles:"],
-		[[0,5,6,1],"TEXT","Parked vehicles:"],
-		[[0,6,6,1],"TEXT",["Locality:","Spawns groups on specified machine"]],
-		[[0,19,9,1],"BUTTON","CANCEL",{{
+		[[6,6,12,1],"COMBOBOX","Locality",[[LLSTRING(Local),LLSTRING(Server)] + (EGVAR(common,headlessClients) apply {LLSTRING(HC) + str _x}),0],false],
+		[[0,1,6,1],"TEXT",LLSTRING(SettingName_unitClassesStr)],
+		[[0,2,6,1],"TEXT",LLSTRING(SettingName_vehClassesStr)],
+		[[0,3,6,1],"TEXT",LLSTRING(SettingName_pedestrianCount)],
+		[[0,4,6,1],"TEXT",LLSTRING(SettingName_driverCount)],
+		[[0,5,6,1],"TEXT",LLSTRING(SettingName_parkedCount)],
+		[[0,6,6,1],"TEXT",[LLSTRING(Locality),LLSTRING(LocalityGroupsInfo)]],
+		[[0,19,9,1],"BUTTON",localize "STR_SDF_CANCEL",{{
 			{deleteMarkerLocal _x} forEach GVAR(blackListTempMarkers);
 		} call EFUNC(SDF,close)}],
-		[[9,19,9,1],"BUTTON","CONFIRM",{[{
+		[[9,19,9,1],"BUTTON",localize "STR_SDF_CONFIRM",{[{
 			{deleteMarkerLocal _x} forEach GVAR(blackListTempMarkers);
 
 			params ["_values","_pos"];
@@ -59,7 +59,7 @@ if (!local _logic) exitWith {};
 				_params call FUNC(populate);
 			};
 
-			[objNull,"Area populated"] call BIS_fnc_showCuratorFeedbackMessage;
+			[objNull,LLSTRING(Module_Populate_AreaPopulated)] call BIS_fnc_showCuratorFeedbackMessage;
 		},true] call EFUNC(SDF,close)}]
 	]] call EFUNC(SDF,dialog);
 },_this] call CBA_fnc_directCall;

@@ -1,10 +1,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Ambient Aircraft
 
-[QGVAR(aircraftEnabled),"CHECKBOX",
-	[LSTRING(SettingName_aircraftEnabled),LSTRING(SettingInfo_aircraftEnabled)],
+[QGVAR(autoStartAircraft),"CHECKBOX",
+	[LSTRING(SettingName_autoStartAircraft),LSTRING(SettingInfo_autoStartAircraft)],
 	[LSTRING(SettingParent),LSTRING(SettingCategory_AmbientAircraft)],
-	true,
+	false,
 	true,
 	{},
 	true
@@ -49,7 +49,7 @@
 [QGVAR(aircraftSpawnDistance),"SLIDER",
 	[LSTRING(SettingName_aircraftSpawnDistance),LSTRING(SettingInfo_aircraftSpawnDistance)],
 	[LSTRING(SettingParent),LSTRING(SettingCategory_AmbientAircraft)],
-	[1000,3000,2750,0],
+	[1000,6000,3000,0],
 	true,
 	{},
 	false
