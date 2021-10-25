@@ -9,7 +9,7 @@
 
 <p align="center">
 	<a href="https://github.com/SceptreOfficial/Simplex-AI-Autonomy/releases/latest">
-		<img src="https://img.shields.io/badge/Version-1.0-blue?style=flat-square" alt="Version">
+		<img src="https://img.shields.io/badge/Version-1.0.1-blue?style=flat-square" alt="Version">
 	</a>
 	<a href="https://github.com/SceptreOfficial/Simplex-AI-Autonomy/issues">
 		<img src="https://img.shields.io/github/issues-raw/SceptreOfficial/Simplex-AI-Autonomy?style=flat-square&label=Issues" alt="Issues">
