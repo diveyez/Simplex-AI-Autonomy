@@ -142,18 +142,18 @@
 [QGVAR(unitClassesStr),"EDITBOX",
 	[LSTRING(SettingName_unitClassesStr),LSTRING(SettingInfo_unitClassesStr)],
 	[LSTRING(SettingParent),LSTRING(SettingCategory_AmbientCivilians)],
-	"",
+	"[""C_Man_casual_2_F"",""C_Man_casual_3_F"",""C_man_w_worker_F"",""C_man_polo_2_F"",""C_Man_casual_1_F"",""C_man_polo_4_F""]",
 	true,
-	{missionNamespace setVariable [QGVAR(unitClasses),_this splitString ", ",true]},
+	{missionNamespace setVariable [QGVAR(unitClasses),parseSimpleArray _this,true]},
 	false
 ] call CBA_fnc_addSetting;
 
 [QGVAR(vehClassesStr),"EDITBOX",
 	[LSTRING(SettingName_vehClassesStr),LSTRING(SettingInfo_vehClassesStr)],
 	[LSTRING(SettingParent),LSTRING(SettingCategory_AmbientCivilians)],
-	"",
+	"[""C_Truck_02_fuel_F"",""C_Truck_02_box_F"",""C_Truck_02_covered_F"",""C_Offroad_01_repair_F"",""C_Van_01_box_F"",""C_Offroad_01_F"",""C_Offroad_01_covered_F"",""C_SUV_01_F""]",
 	true,
-	{missionNamespace setVariable [QGVAR(vehClasses),_this splitString ", ",true]},
+	{missionNamespace setVariable [QGVAR(vehClasses),parseSimpleArray _this,true]},
 	false
 ] call CBA_fnc_addSetting;
 

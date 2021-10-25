@@ -1,6 +1,4 @@
 #include "script_component.hpp"
-#define UNIT_CLASSES ["C_Man_casual_2_F","C_Man_casual_3_F","C_man_w_worker_F","C_man_polo_2_F","C_Man_casual_1_F","C_man_polo_4_F"]
-#define VEH_CLASSES ["C_Truck_02_fuel_F","C_Truck_02_box_F","C_Truck_02_covered_F","C_Offroad_01_repair_F","C_Van_01_box_F","C_Offroad_01_F","C_Offroad_01_covered_F","C_SUV_01_F"]
 
 params ["_logic","_synced"];
 
@@ -27,8 +25,8 @@ if (!local _logic) exitWith {};
 	[[36,20],[
 		[[0,0,36,1],"STRUCTUREDTEXT",format ["<t align='center'>%1</t>",LLSTRING(Module_Populate)],EGVAR(SDF,profileRGBA)],
 		[[18,1,18,19],"MAP2","",[[_pos,100,100,0,false],"SOLID"]],
-		[[6,1,12,1],"EDITBOX","Units",str UNIT_CLASSES,false],
-		[[6,2,12,1],"EDITBOX","Vehicles",str VEH_CLASSES,false],
+		[[6,1,12,1],"EDITBOX","Units",GVAR(unitClassesStr),false],
+		[[6,2,12,1],"EDITBOX","Vehicles",GVAR(vehClassesStr),false],
 		[[6,3,12,1],"SLIDER","Pedestrians",[[0,100,0],0],false],
 		[[6,4,12,1],"SLIDER","Driving",[[0,50,0],0],false],
 		[[6,5,12,1],"SLIDER","Parked",[[0,50,0],0],false],

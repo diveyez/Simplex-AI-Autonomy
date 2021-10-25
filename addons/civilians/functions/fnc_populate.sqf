@@ -1,6 +1,4 @@
 #include "script_component.hpp"
-#define UNIT_DEFAULTS ["C_Man_casual_2_F","C_Man_casual_3_F","C_man_w_worker_F","C_man_polo_2_F","C_Man_casual_1_F","C_man_polo_4_F"]
-#define VEH_DEFAULTS ["C_Truck_02_fuel_F","C_Truck_02_box_F","C_Truck_02_covered_F","C_Offroad_01_repair_F","C_Van_01_box_F","C_Offroad_01_F","C_Offroad_01_covered_F","C_SUV_01_F"]
 
 params [
 	["_area",[],["",objNull,locationNull,[]],5],
@@ -26,11 +24,11 @@ private _areaPos = _area # 0;
 if (_blacklist find {_areaPos inArea _x} != -1) exitWith {};
 
 if (_unitClasses isEqualTo []) then {
-	_unitClasses = UNIT_DEFAULTS;
+	_unitClasses = ["C_Man_casual_2_F","C_Man_casual_3_F","C_man_w_worker_F","C_man_polo_2_F","C_Man_casual_1_F","C_man_polo_4_F"];
 };
 
 if (_vehicleClasses isEqualTo []) then {
-	_vehicleClasses = VEH_DEFAULTS;
+	_vehicleClasses = ["C_Truck_02_fuel_F","C_Truck_02_box_F","C_Truck_02_covered_F","C_Offroad_01_repair_F","C_Van_01_box_F","C_Offroad_01_F","C_Offroad_01_covered_F","C_SUV_01_F"];
 };
 
 _spawnCounts params [["_pedestrianCount",20,[0]],["_driverCount",8,[0]],["_parkedCount",6,[0]]];
