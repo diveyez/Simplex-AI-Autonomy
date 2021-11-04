@@ -47,7 +47,7 @@ _vehicle setDir _dir;
 	params ["_vehicle","_randPos"];
 	_vehicle setVelocity [0,0,0];
 	_vehicle setVehiclePosition [_randPos,[],0,"NONE"];
-	[FUNC(spawnCleanup),_vehicle,2] call CBA_fnc_waitAndExecute;
+	[EFUNC(common,spawnCleanup),_vehicle,2] call CBA_fnc_waitAndExecute;
 },[_vehicle,_randPos],1] call CBA_fnc_waitAndExecute;
 
 private _group = createGroup [civilian,true];

@@ -7,6 +7,7 @@ PREP(iterate);
 PREP(nudge);
 PREP(positionAvg);
 PREP(sortBy);
+PREP(spawnCleanup);
 PREP(spawnGroup);
 PREP(throwGrenade);
 PREP(transferGroups);

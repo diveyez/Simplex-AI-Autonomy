@@ -11,7 +11,6 @@ PREP(panic);
 PREP(populate);
 PREP(remove);
 PREP(spawnAircraft);
-PREP(spawnCleanup);
 PREP(spawnDriver);
 PREP(spawnParked);
 PREP(spawnPedestrian);

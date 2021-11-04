@@ -106,7 +106,7 @@ _vehicle setDir _dir;
 	params ["_vehicle","_spawnPos"];
 	_vehicle setVelocity [0,0,0];
 	_vehicle setVehiclePosition [_spawnPos,[],0,"NONE"];
-	[FUNC(spawnCleanup),_vehicle,2] call CBA_fnc_waitAndExecute;
+	[EFUNC(common,spawnCleanup),_vehicle,2] call CBA_fnc_waitAndExecute;
 },[_vehicle,_spawnPos],1] call CBA_fnc_waitAndExecute;
 
 [_vehicle,_customArgs] call _customInit;

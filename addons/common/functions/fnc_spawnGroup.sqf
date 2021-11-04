@@ -156,6 +156,7 @@ private _spawns = [];
 		_unit allowDamage false;
 		_spawns pushBack _unit;
 		_unit setVehiclePosition [_itemPos,[],0,"NONE"];
+		[EFUNC(common,spawnCleanup),_vehicle,2] call CBA_fnc_waitAndExecute;
 	};
 
 	// If given, set the unit's rank.
