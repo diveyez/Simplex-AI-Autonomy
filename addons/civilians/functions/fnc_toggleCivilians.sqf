@@ -10,7 +10,10 @@ if (GVAR(ambientCivilians)) then {
 } else {
 	// Start
 	GVAR(playerlist) = [];
-	GVAR(PFHID) = [FUNC(clockwork),0.5] call CBA_fnc_addPerFrameHandler;
+	GVAR(activePoints) = [];
+	GVAR(inactivePoints) = [];
+	GVAR(isolatedPoints) = [];
+	GVAR(PFHID) = [FUNC(clockwork),0.1] call CBA_fnc_addPerFrameHandler;
 
 	missionNamespace setVariable [QGVAR(ambientCivilians),true,true];
 };
