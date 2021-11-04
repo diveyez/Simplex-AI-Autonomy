@@ -41,7 +41,7 @@ private _queueCount = 0;
 			_min = round linearConversion [0,1,_coefficient,0,_min,true];
 			_max = round linearConversion [0,1,_coefficient,0,_max,true];
 
-			for "_i" from 1 to (_min + round random (_max - _min)) do {
+			for "_i" from 1 to ((_min + round random (_max - _min)) min _max) do {
 				[_assignmentType,[_area,_side,_config,_settings]] call FUNC(occupyQueueAdd);
 				_queueCount = _queueCount + 1;
 			};

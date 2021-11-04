@@ -67,15 +67,15 @@ if (!local _logic) exitWith {};
 			[[0,12,2,1],"TEXT","Min:"],
 			[[2,12,7,1],"SLIDER","Min",[[0,25,0],1]],
 			[[9,12,2,1],"TEXT","Max:"],
-			[[11,12,7,1],"SLIDER","Max",[[0,25,0],1]],
+			[[11,12,7,1],"SLIDER","Max",[[1,25,0],1]],
 			[[0,13,7,1],"BUTTON","Add config",{
 				[10 call EFUNC(SDF,getValue),12 call EFUNC(SDF,getValue)] params ["_min","_max"];
 				15 call EFUNC(SDF,getValue) params ["_densitySelection","_groupSelection"];
 				
-				(GVAR(density) # _densitySelection) pushBack [+(GVAR(classList # 1)),[_min,_max]];
+				(GVAR(density) # _densitySelection) pushBack [+(GVAR(classList) # 1),[_min,_max]];
 
 				[15,[_densitySelection],[format [
-					"MIN: %1 / MAX: %2 : %3",
+					"%1 / %2 : %3",
 					_min,
 					_max,
 					GVAR(classList) # 0 apply {_x # 0 # 0}
@@ -131,7 +131,7 @@ if (!local _logic) exitWith {};
 						_minMax params ["_min","_max"];
 
 						[15,[_densitySelection],[format [
-							"MIN: %1 / MAX: %2 : %3",
+							"%1 / %2 : %3",
 							_min,
 							_max,
 							_classes apply {getText (_cfgVehicles >> _x >> "displayName")}
@@ -258,6 +258,8 @@ if (!local _logic) exitWith {};
 				"_localitySelection"
 			];
 
+			GVAR(densityCache) = +GVAR(density);
+
 			private _occupyParams = [
 				_area,
 				[east,west,independent] # _sideSelection,
@@ -281,4 +283,26 @@ if (!local _logic) exitWith {};
 			};
 		},true] call EFUNC(SDF,close)}]
 	]] call EFUNC(SDF,dialog);
+
+	if (isNil QGVAR(densityCache)) exitWith {};
+
+	GVAR(density) = +GVAR(densityCache);
+
+	private _cfgVehicles = configFile >> "CfgVehicles";
+
+	{
+		private _densitySelection = _forEachIndex;
+		
+		{
+			_x params ["_classes","_minMax"];
+			_minMax params ["_min","_max"];
+
+			[15,[_densitySelection],[format [
+				"%1 / %2 : %3",
+				_min,
+				_max,
+				_classes apply {getText (_cfgVehicles >> _x >> "displayName")}
+			]]] call EFUNC(SDF,treeAdd);
+		} forEach _x;
+	} forEach GVAR(density);
 },_this] call CBA_fnc_directCall;
