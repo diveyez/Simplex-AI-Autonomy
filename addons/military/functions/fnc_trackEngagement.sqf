@@ -106,7 +106,8 @@ if (_respondingGroups isEqualTo []) exitWith {
 
 		{
 			private _target = _x getVariable [QGVAR(target),objNull];
-			if (!alive _target) then {
+			
+			if (!alive _target || {{alive _x} count crew _target isEqualTo 0}) then {
 				_target = selectRandom _knownTargets;
 				_x setVariable [QGVAR(target),_target];
 			};
