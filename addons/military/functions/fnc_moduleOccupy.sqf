@@ -97,7 +97,14 @@ if (!local _logic) exitWith {};
 			[[0,19,6,1],"TEXT","Side presets"],
 			[[6,19,12,1],"COMBOBOX","Presets",[[],0],false,{
 				params ["_presetSelection"];
-				[18,GVAR(occupationPresets) # (4 call EFUNC(SDF,getValue)) # _presetSelection # 0] call EFUNC(SDF,setValueData);
+				
+				private _presets = GVAR(occupationPresets) # (4 call EFUNC(SDF,getValue));
+				
+				if (_presets isEqualTo []) then {
+					[18,[]] call EFUNC(SDF,setValueData);
+				} else {
+					[18,_presets # _presetSelection # 0] call EFUNC(SDF,setValueData);
+				};
 			}],
 			[[0,20,18,1],"EDITBOX","Name",""],
 			[[0,21,6,1],"BUTTON","Load",{
